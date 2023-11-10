@@ -1,0 +1,6 @@
+res://scenes/main.tscn
+res://new_shader.gdshader
+res://scenes/main.gdshader
+res://scenes/grid-cell.tscn
+res://scenes/server.tscn
+res://scripts/main.gd

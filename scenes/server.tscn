@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://o856665jjiuf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kk3fp"]
+resource_local_to_scene = true
+albedo_color = Color(0.172549, 0.141176, 0.180392, 1)
+metallic_specular = 0.0
+clearcoat_enabled = true
+clearcoat = 0.2
+texture_filter = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_ec4he"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kk3fp")
+size = Vector3(0.4, 0.6, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06da5"]
+shading_mode = 0
+albedo_color = Color(1, 20.88, 0.74, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hrl5v"]
+material = SubResource("StandardMaterial3D_06da5")
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_uwfw5"]
+data = PackedVector3Array(-0.2, 0.4, 0.15, 0.2, 0.4, 0.15, -0.2, -0.4, 0.15, 0.2, 0.4, 0.15, 0.2, -0.4, 0.15, -0.2, -0.4, 0.15, 0.2, 0.4, -0.15, -0.2, 0.4, -0.15, 0.2, -0.4, -0.15, -0.2, 0.4, -0.15, -0.2, -0.4, -0.15, 0.2, -0.4, -0.15, 0.2, 0.4, 0.15, 0.2, 0.4, -0.15, 0.2, -0.4, 0.15, 0.2, 0.4, -0.15, 0.2, -0.4, -0.15, 0.2, -0.4, 0.15, -0.2, 0.4, -0.15, -0.2, 0.4, 0.15, -0.2, -0.4, -0.15, -0.2, 0.4, 0.15, -0.2, -0.4, 0.15, -0.2, -0.4, -0.15, 0.2, 0.4, 0.15, -0.2, 0.4, 0.15, 0.2, 0.4, -0.15, -0.2, 0.4, 0.15, -0.2, 0.4, -0.15, 0.2, 0.4, -0.15, -0.2, -0.4, 0.15, 0.2, -0.4, 0.15, -0.2, -0.4, -0.15, 0.2, -0.4, 0.15, 0.2, -0.4, -0.15, -0.2, -0.4, -0.15)
+
+[node name="MeshInstance3D2" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_ec4he")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0333333, 0, 0, 0, 0.0333333, 0, 0, 0, 0.0333333, -0.197423, 0.145569, 0)
+mesh = SubResource("BoxMesh_hrl5v")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0333333, 0, 0, 0, 0.0333333, 0, 0, 0, 0.0333333, -0.197423, 0.145569, 0.0788876)
+mesh = SubResource("BoxMesh_hrl5v")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0333333, 0, 0, 0, 0.0333333, 0, 0, 0, 0.0333333, -0.197423, 0.145569, -0.0640872)
+mesh = SubResource("BoxMesh_hrl5v")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_uwfw5")
