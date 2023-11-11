@@ -1,5 +1,6 @@
-MarginContainer
 Label
+Timer
+MarginContainer
 VBoxContainer
 Control
 CanvasLayer

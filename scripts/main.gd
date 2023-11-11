@@ -8,6 +8,15 @@ extends Node3D
 @onready var _server_scene: PackedScene = load("res://scenes/server.tscn")
 
 @onready var total_computing_power_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/TotalComputingPowerLabel
+@onready var time_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/TimeLabel
+
+@onready var global_timer: Timer = $GlobalTimer
+
+
+var time_elapsed_in_second: int:
+	set(time):
+		time_elapsed_in_second = time
+		time_label.text = str(time)
 
 const MAX_CAMERA_SIZE: int = 10
 
@@ -37,6 +46,14 @@ func _ready():
 		
 		index+=1
 		
+	
+	global_timer.timeout.connect(_on_global_timer_tick)	
+	global_timer.start()
+	
+		
+		
+func _on_global_timer_tick():
+	time_elapsed_in_second += 1
 
 func _on_click(origin):
 	var server: Server = _server_scene.instantiate()

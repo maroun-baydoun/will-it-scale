@@ -1,2 +1,3 @@
 res://scenes/main.tscn
 res://scenes/server-container.tscn
+res://scripts/main.gd
