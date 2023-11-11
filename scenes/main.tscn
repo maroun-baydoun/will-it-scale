@@ -28,10 +28,11 @@ glow_hdr_threshold = 0.9
 glow_hdr_scale = 0.0
 glow_hdr_luminance_cap = 2.3
 glow_map_strength = 0.0
+fog_enabled = true
 fog_light_color = Color(0.211765, 0.486275, 1, 1)
 fog_sun_scatter = 0.82
-fog_height = -0.1
-fog_height_density = 3.0
+fog_height = -0.2
+fog_height_density = 1.7391
 volumetric_fog_emission_energy = 6.0
 volumetric_fog_length = 82.5
 adjustment_enabled = true
@@ -78,7 +79,7 @@ mesh = SubResource("PlaneMesh_mo708")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_tpmab")
 
-[node name="server_container" parent="Floor" instance=ExtResource("2_n07kn")]
+[node name="ServerContainer" parent="Floor" instance=ExtResource("2_n07kn")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.0061, 0)
@@ -108,7 +109,6 @@ omni_range = 19.8667
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,20 +133,12 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="TotalComputingPowerLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+alignment = 2
 
 [node name="TimeLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 
-[node name="LoadLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
+[node name="StatisticsPanel" parent="CanvasLayer" instance=ExtResource("3_ph4uk")]
 
-[node name="statistics-panel" parent="CanvasLayer" instance=ExtResource("3_ph4uk")]
-
-[connection signal="computing_power_updated" from="Floor/server_container" to="." method="_on_server_container_computing_power_updated"]
+[connection signal="computing_power_updated" from="Floor/ServerContainer" to="." method="_on_server_container_computing_power_updated"]

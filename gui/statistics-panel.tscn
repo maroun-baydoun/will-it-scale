@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmci4bg3dbcar"]
+[gd_scene load_steps=4 format=3 uid="uid://bmci4bg3dbcar"]
 
+[ext_resource type="Script" path="res://scripts/statistics-panel.gd" id="1_5sauv"]
 [ext_resource type="FontFile" uid="uid://cwxxvels6k7tt" path="res://assets/fonts/NotoSansMono-Regular.ttf" id="1_yb4qv"]
 [ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="2_8vech"]
 
@@ -11,6 +12,7 @@ offset_top = -1.0
 offset_right = 436.0
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("1_5sauv")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -50,7 +52,7 @@ shortcut_keys_enabled = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yb4qv")
 theme_override_font_sizes/font_size = 52
-text = "100"
+text = "0"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

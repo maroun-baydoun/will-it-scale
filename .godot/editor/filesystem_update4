@@ -2,3 +2,5 @@ res://scenes/main.tscn
 res://scenes/server-container.tscn
 res://scripts/main.gd
 res://gui/statistics-panel.tscn
+res://scripts/statistics-panel.gd
+res://scripts/server-container.gd

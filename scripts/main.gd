@@ -3,15 +3,15 @@ extends Node3D
 @onready var _camera = $CameraContainer/Camera3D
 @onready var _camera_container = $CameraContainer
 @onready var _floor = $Floor
-@onready var server_container: ServerContiner = $Floor/server_container
+@onready var server_container: ServerContiner = $Floor/ServerContainer
 
 @onready var _server_scene: PackedScene = load("res://scenes/server.tscn")
 
-@onready var total_computing_power_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer/TotalComputingPowerLabel
 @onready var time_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer/TimeLabel
-@onready var load_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/LoadLabel
 
 @onready var global_timer: Timer = $GlobalTimer
+
+@onready var statistics_panel: StatisticsPanel = $CanvasLayer/StatisticsPanel
 
 var random_number_generator = RandomNumberGenerator.new()
 
@@ -62,15 +62,12 @@ func _on_global_timer_tick():
 	time_elapsed_in_second += 1
 	
 	sessions = random_number_generator.randi_range(1, 100)
-	load_label.text = str(sessions * computing_power_per_session)
+	statistics_panel.current_load = sessions * computing_power_per_session
 
 func _on_click(origin):
 	var server: Server = _server_scene.instantiate()
 	server_container.add_server(server)
 	server.appear(origin)
-	
-	
-	
 	
 	
 func _unhandled_input(event):
@@ -90,4 +87,4 @@ func _unhandled_input(event):
 	
 
 func _on_server_container_computing_power_updated(computing_power) -> void:
-	total_computing_power_label.text = str(computing_power)
+	statistics_panel.total_computing_power = computing_power
