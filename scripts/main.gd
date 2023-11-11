@@ -7,11 +7,17 @@ extends Node3D
 
 @onready var _server_scene: PackedScene = load("res://scenes/server.tscn")
 
-@onready var total_computing_power_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/TotalComputingPowerLabel
-@onready var time_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/TimeLabel
+@onready var total_computing_power_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer/TotalComputingPowerLabel
+@onready var time_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer/TimeLabel
+@onready var load_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/LoadLabel
 
 @onready var global_timer: Timer = $GlobalTimer
 
+var random_number_generator = RandomNumberGenerator.new()
+
+
+var sessions: int
+var computing_power_per_session: int = 10
 
 var time_elapsed_in_second: int:
 	set(time):
@@ -54,6 +60,9 @@ func _ready():
 		
 func _on_global_timer_tick():
 	time_elapsed_in_second += 1
+	
+	sessions = random_number_generator.randi_range(1, 100)
+	load_label.text = str(sessions * computing_power_per_session)
 
 func _on_click(origin):
 	var server: Server = _server_scene.instantiate()

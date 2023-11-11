@@ -1,7 +1,11 @@
+AnimationPlayer
+ColorRect
+VBoxContainer
+RichTextLabel
 Label
+HBoxContainer
 Timer
 MarginContainer
-VBoxContainer
 Control
 CanvasLayer
 GPUParticles3D

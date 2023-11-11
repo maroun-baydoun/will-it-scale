@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
+[ext_resource type="PackedScene" uid="uid://bmci4bg3dbcar" path="res://gui/statistics-panel.tscn" id="3_ph4uk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -57,8 +58,6 @@ metallic = 0.37
 material = SubResource("StandardMaterial3D_kji3e")
 size = Vector3(4, 10, 4)
 
-[sub_resource type="SystemFont" id="SystemFont_c8oif"]
-
 [node name="Main" type="Node3D"]
 script = ExtResource("1_nvayq")
 
@@ -88,7 +87,7 @@ mesh = SubResource("BoxMesh_36swf")
 [node name="CameraContainer" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraContainer"]
-transform = Transform3D(-0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, 0.5, -0.5, -2.01485, 3.00146, -1.97786)
+transform = Transform3D(-0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, 0.5, -0.5, -2.01485, 2.76879, -1.97786)
 projection = 1
 current = true
 fov = 67.8
@@ -109,6 +108,7 @@ omni_range = 19.8667
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,17 +126,27 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
 layout_mode = 2
 
-[node name="TotalComputingPowerLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TotalComputingPowerLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+
+[node name="LoadLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 
-[node name="TimeLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_c8oif")
-theme_override_font_sizes/font_size = 48
+[node name="statistics-panel" parent="CanvasLayer" instance=ExtResource("3_ph4uk")]
 
 [connection signal="computing_power_updated" from="Floor/server_container" to="." method="_on_server_container_computing_power_updated"]
