@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://o856665jjiuf"]
+[gd_scene load_steps=7 format=3 uid="uid://o856665jjiuf"]
+
+[ext_resource type="Script" path="res://scripts/server.gd" id="1_47tiv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kk3fp"]
 resource_local_to_scene = true
@@ -26,6 +28,7 @@ data = PackedVector3Array(-0.2, 0.4, 0.15, 0.2, 0.4, 0.15, -0.2, -0.4, 0.15, 0.2
 
 [node name="MeshInstance3D2" type="MeshInstance3D"]
 mesh = SubResource("BoxMesh_ec4he")
+script = ExtResource("1_47tiv")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0333333, 0, 0, 0, 0.0333333, 0, 0, 0, 0.0333333, -0.197423, 0.145569, 0)

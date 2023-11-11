@@ -3,9 +3,11 @@ extends Node3D
 @onready var _camera = $CameraContainer/Camera3D
 @onready var _camera_container = $CameraContainer
 @onready var _floor = $Floor
+@onready var server_container: ServerContiner = $Floor/server_container
 
 @onready var _server_scene: PackedScene = load("res://scenes/server.tscn")
 
+@onready var total_computing_power_label: Label = $CanvasLayer/Control/MarginContainer/VBoxContainer/TotalComputingPowerLabel
 
 const MAX_CAMERA_SIZE: int = 10
 
@@ -15,7 +17,6 @@ func _ready():
 	const Z = 0.015
 	
 	var transforms = []
-	
 	
 	
 	for i in range(-2, 3):
@@ -38,15 +39,12 @@ func _ready():
 		
 
 func _on_click(origin):
-	var server = _server_scene.instantiate()
-	var server_height = server.mesh.size.y
-	server.transform.origin = origin
-	server.transform.origin.y = -server_height * 5
-	var tween = get_tree().create_tween()
-	tween.set_trans(Tween.TRANS_BACK)
-	tween.tween_property(server, "transform:origin:y", server_height  / 2, 0.5)
+	var server: Server = _server_scene.instantiate()
+	server_container.add_server(server)
+	server.appear(origin)
 	
-	_floor.add_child(server)
+	
+	
 	
 	
 func _unhandled_input(event):
@@ -65,8 +63,5 @@ func _unhandled_input(event):
 	
 	
 
-
-
-
-
-	
+func _on_server_container_computing_power_updated(computing_power) -> void:
+	total_computing_power_label.text = str(computing_power)

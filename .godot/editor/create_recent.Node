@@ -1,3 +1,8 @@
+MarginContainer
+Label
+VBoxContainer
+Control
+CanvasLayer
 GPUParticles3D
 FogVolume
 MeshInstance3D
