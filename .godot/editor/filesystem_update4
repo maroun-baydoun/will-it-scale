@@ -1,10 +1,2 @@
 res://scenes/main.tscn
-res://new_shader.gdshader
-res://scenes/main.gdshader
-res://scenes/grid-cell.tscn
-res://scenes/server.tscn
-res://scripts/main.gd
-res://scripts/server.gd
-res://scenes/server_container.tscn
 res://scenes/server-container.tscn
-res://scripts/server-container.gd
