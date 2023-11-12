@@ -8,3 +8,5 @@ res://scripts/server.gd
 res://scenes/server.tscn
 res://scripts/finance-manager.gd
 res://scenes/grid-cell.tscn
+res://scripts/camera-controller.gd
+res://scripts/grid-cell.gd

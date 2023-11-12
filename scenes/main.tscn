@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=14 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
+[ext_resource type="Script" path="res://scripts/camera-controller.gd" id="3_i8ue0"]
 [ext_resource type="PackedScene" uid="uid://bmci4bg3dbcar" path="res://gui/statistics-panel.tscn" id="3_ph4uk"]
 [ext_resource type="Script" path="res://scripts/finance-manager.gd" id="4_223wg"]
 
@@ -88,6 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.0061, 0)
 mesh = SubResource("BoxMesh_36swf")
 
 [node name="CameraContainer" type="Node3D" parent="."]
+script = ExtResource("3_i8ue0")
 
 [node name="Camera3D" type="Camera3D" parent="CameraContainer"]
 transform = Transform3D(-0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, 0.5, -0.5, -2.01485, 2.76879, -1.97786)

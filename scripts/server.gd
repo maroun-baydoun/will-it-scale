@@ -21,8 +21,7 @@ func appear(origin: Vector3):
 	
 	tween.tween_property(self, "transform:origin:y", height / 2, 0.5)
 	
-	await get_tree().create_timer(0.3)
-	
+
 	animate_price()
 
 
@@ -34,5 +33,4 @@ func animate_price():
 	tween.set_ease(Tween.EASE_OUT)
 	
 	tween.tween_property(price_label, "transform:origin:y", height * 1.5, 0.7)
-	await get_tree().create_timer(0.5)
 	tween.tween_property(price_label, "modulate:a", 0, 0.2)

@@ -5,7 +5,6 @@ var is_empty: bool = true;
 
 signal clicked(origin);
 
-@onready var _body = $StaticBody3D
 @onready var _initial_alpha = mesh.material.albedo_color.a
 
 func _on_body_input_event(camera, event, position, normal, shape_idx):
