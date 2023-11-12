@@ -10,3 +10,8 @@ res://scripts/finance-manager.gd
 res://scenes/grid-cell.tscn
 res://scripts/camera-controller.gd
 res://scripts/grid-cell.gd
+res://scripts/global-timer.gd
+res://gui/date-display.tscn
+res://gui/date-time-display.tscn
+res://scripts/date-time-display.gd
+res://scripts/date-time-manager.gd

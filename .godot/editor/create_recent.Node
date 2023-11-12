@@ -1,14 +1,14 @@
 Node
+HBoxContainer
+Label
+MarginContainer
 CanvasLayer
 AnimationPlayer
 Label3D
-Label
 ColorRect
 VBoxContainer
 RichTextLabel
-HBoxContainer
 Timer
-MarginContainer
 Control
 GPUParticles3D
 FogVolume

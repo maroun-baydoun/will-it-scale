@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=16 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
 [ext_resource type="Script" path="res://scripts/camera-controller.gd" id="3_i8ue0"]
 [ext_resource type="PackedScene" uid="uid://bmci4bg3dbcar" path="res://gui/statistics-panel.tscn" id="3_ph4uk"]
 [ext_resource type="Script" path="res://scripts/finance-manager.gd" id="4_223wg"]
+[ext_resource type="PackedScene" uid="uid://burvuv1q1oe1t" path="res://gui/date-time-display.tscn" id="6_bcuad"]
+[ext_resource type="Script" path="res://scripts/date-time-manager.gd" id="7_3cje0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -107,44 +109,20 @@ light_specular = 0.4
 shadow_opacity = 0.4
 omni_range = 19.8667
 
-[node name="GlobalTimer" type="Timer" parent="."]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 2
-
-[node name="TimeLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-
 [node name="StatisticsPanel" parent="CanvasLayer" instance=ExtResource("3_ph4uk")]
+
+[node name="DateTimeDisplay" parent="CanvasLayer" instance=ExtResource("6_bcuad")]
 
 [node name="FinanceManager" type="Node" parent="."]
 script = ExtResource("4_223wg")
 
+[node name="DateTimeManager" type="Node" parent="."]
+script = ExtResource("7_3cje0")
+
+[node name="GlobalTimer" type="Timer" parent="DateTimeManager"]
+
 [connection signal="computing_power_updated" from="Floor/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
+[connection signal="ticked" from="DateTimeManager" to="." method="_on_date_time_manager_ticked"]
+[connection signal="timeout" from="DateTimeManager/GlobalTimer" to="DateTimeManager" method="_on_timer_timeout"]
