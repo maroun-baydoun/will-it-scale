@@ -1,8 +1,14 @@
 extends Control
 class_name StatisticsPanel
 
+@onready var current_funds_label:Label =  $MarginContainer/VBoxContainer/VBoxContainer3/CurrentFundsLabel
 @onready var total_computing_power_label:Label =  $MarginContainer/VBoxContainer/VBoxContainer/TotalComputingPowerLabel
 @onready var current_load_label: Label = $MarginContainer/VBoxContainer/VBoxContainer2/CurrentLoadLabel
+
+
+var current_funds:float:
+	set(value):
+		current_funds_label.text = str(value)
 
 var total_computing_power:int:
 	set(value):

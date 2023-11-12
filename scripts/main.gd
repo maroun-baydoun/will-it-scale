@@ -13,6 +13,8 @@ extends Node3D
 
 @onready var statistics_panel: StatisticsPanel = $CanvasLayer/StatisticsPanel
 
+@onready var finance_manager: FinanceManager = $FinanceManager
+
 var random_number_generator = RandomNumberGenerator.new()
 
 
@@ -46,12 +48,16 @@ func _ready():
 		_grid_cell.transform.origin = transform
 		_grid_cell.index = index
 		
-		_grid_cell.clicked.connect(_on_click)
+		_grid_cell.clicked.connect(_on_grid_cell_clicked)
 		
 		_floor.add_child(_grid_cell)
 		
 		index+=1
 		
+		
+	finance_manager.funds_added.connect(_on_funds_added)
+	finance_manager.funds_removed.connect(_on_funds_removed)
+	finance_manager.add_initial_funds(5000.0)
 	
 	global_timer.timeout.connect(_on_global_timer_tick)	
 	global_timer.start()
@@ -64,10 +70,24 @@ func _on_global_timer_tick():
 	sessions = random_number_generator.randi_range(1, 100)
 	statistics_panel.current_load = sessions * computing_power_per_session
 
-func _on_click(origin):
+
+func _on_funds_added(amount):
+	statistics_panel.current_funds = finance_manager.current_funds
+	
+func _on_funds_removed(amount):
+	statistics_panel.current_funds = finance_manager.current_funds
+
+func _on_grid_cell_clicked(origin):
 	var server: Server = _server_scene.instantiate()
+	
+	if not finance_manager.can_purchase(server.price):
+		server.queue_free()
+		return
+	
 	server_container.add_server(server)
 	server.appear(origin)
+	
+	finance_manager.remove_funds(server.price)
 	
 	
 func _unhandled_input(event):

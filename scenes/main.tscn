@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=13 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
 [ext_resource type="PackedScene" uid="uid://bmci4bg3dbcar" path="res://gui/statistics-panel.tscn" id="3_ph4uk"]
+[ext_resource type="Script" path="res://scripts/finance-manager.gd" id="4_223wg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -140,5 +141,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 
 [node name="StatisticsPanel" parent="CanvasLayer" instance=ExtResource("3_ph4uk")]
+
+[node name="FinanceManager" type="Node" parent="."]
+script = ExtResource("4_223wg")
 
 [connection signal="computing_power_updated" from="Floor/ServerContainer" to="." method="_on_server_container_computing_power_updated"]

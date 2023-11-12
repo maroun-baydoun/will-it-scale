@@ -6,3 +6,5 @@ res://scripts/statistics-panel.gd
 res://scripts/server-container.gd
 res://scripts/server.gd
 res://scenes/server.tscn
+res://scripts/finance-manager.gd
+res://scenes/grid-cell.tscn
