@@ -4,3 +4,5 @@ res://scripts/main.gd
 res://gui/statistics-panel.tscn
 res://scripts/statistics-panel.gd
 res://scripts/server-container.gd
+res://scripts/server.gd
+res://scenes/server.tscn

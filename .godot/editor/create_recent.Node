@@ -1,13 +1,14 @@
+CanvasLayer
 AnimationPlayer
+Label3D
+Label
 ColorRect
 VBoxContainer
 RichTextLabel
-Label
 HBoxContainer
 Timer
 MarginContainer
 Control
-CanvasLayer
 GPUParticles3D
 FogVolume
 MeshInstance3D

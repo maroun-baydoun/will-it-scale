@@ -68,7 +68,8 @@ environment = SubResource("Environment_5qu0w")
 [node name="Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.963434, 0.168605, -0.208247, 4.00983e-16, 0.777201, 0.629253, 0.267945, -0.606243, 0.748782, 2.08165e-12, 6.96362, 4.18115)
 light_color = Color(0.945098, 0.941176, 0.996078, 1)
-shadow_opacity = 0.7
+shadow_enabled = true
+shadow_opacity = 0.6
 sky_mode = 1
 
 [node name="Floor" type="MeshInstance3D" parent="."]
@@ -100,7 +101,6 @@ far = 30.0
 transform = Transform3D(0.820583, -0.555437, 0.134663, 0.553442, 0.831048, 0.0553243, -0.142641, 0.0291302, 0.989346, -0.044, 4.20557, -7.81128)
 light_energy = 2.831
 light_specular = 0.4
-shadow_enabled = true
 shadow_opacity = 0.4
 omni_range = 19.8667
 
