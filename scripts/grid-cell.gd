@@ -22,9 +22,11 @@ func _on_body_input_event(camera, event, position, normal, shape_idx):
 
 func _on_body_mouse_entered():
 	if is_empty:
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 		mesh.material.albedo_color.a = _initial_alpha + 0.4
 
 
 func _on_body_mouse_exited():
 	if is_empty:
+		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 		mesh.material.albedo_color.a = _initial_alpha
