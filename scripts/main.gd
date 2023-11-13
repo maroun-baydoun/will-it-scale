@@ -46,6 +46,7 @@ func _ready():
 	
 	date_time_manager.start()
 	
+	
 		
 func _on_funds_added(amount):
 	statistics_panel.current_funds = finance_manager.current_funds
@@ -53,15 +54,16 @@ func _on_funds_added(amount):
 func _on_funds_removed(amount):
 	statistics_panel.current_funds = finance_manager.current_funds
 
-func _on_grid_cell_clicked(origin):
+func _on_grid_cell_clicked(cell: GridCell):
 	var server: Server = server_scene.instantiate()
 	
 	if not finance_manager.can_purchase(server.price):
 		server.queue_free()
 		return
 	
+	cell.occupy()
 	server_container.add_server(server)
-	server.appear(origin)
+	server.appear(cell.transform.origin)
 	
 	finance_manager.remove_funds(server.price)
 	
