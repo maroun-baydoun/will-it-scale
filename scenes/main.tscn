@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=17 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
 [ext_resource type="Script" path="res://scripts/camera-controller.gd" id="3_i8ue0"]
 [ext_resource type="PackedScene" uid="uid://bmci4bg3dbcar" path="res://gui/statistics-panel.tscn" id="3_ph4uk"]
-[ext_resource type="Script" path="res://scripts/finance-manager.gd" id="4_223wg"]
 [ext_resource type="PackedScene" uid="uid://burvuv1q1oe1t" path="res://gui/date-time-display.tscn" id="6_bcuad"]
-[ext_resource type="Script" path="res://scripts/date-time-manager.gd" id="7_3cje0"]
+[ext_resource type="Script" path="res://scripts/managers/finance-manager.gd" id="6_k0lmj"]
+[ext_resource type="Script" path="res://scripts/managers/date-time-manager.gd" id="7_qrmsp"]
+[ext_resource type="Script" path="res://scripts/managers/traffic-manager.gd" id="8_ygmq4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -85,6 +86,7 @@ mesh = SubResource("PlaneMesh_mo708")
 shape = SubResource("ConcavePolygonShape3D_tpmab")
 
 [node name="ServerContainer" parent="Floor" instance=ExtResource("2_n07kn")]
+unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.0061, 0)
@@ -113,16 +115,21 @@ omni_range = 19.8667
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="StatisticsPanel" parent="CanvasLayer" instance=ExtResource("3_ph4uk")]
+unique_name_in_owner = true
 
 [node name="DateTimeDisplay" parent="CanvasLayer" instance=ExtResource("6_bcuad")]
+unique_name_in_owner = true
 
 [node name="FinanceManager" type="Node" parent="."]
-script = ExtResource("4_223wg")
+script = ExtResource("6_k0lmj")
 
 [node name="DateTimeManager" type="Node" parent="."]
-script = ExtResource("7_3cje0")
+script = ExtResource("7_qrmsp")
 
 [node name="GlobalTimer" type="Timer" parent="DateTimeManager"]
+
+[node name="TrafficManager" type="Node" parent="."]
+script = ExtResource("8_ygmq4")
 
 [connection signal="computing_power_updated" from="Floor/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
 [connection signal="ticked" from="DateTimeManager" to="." method="_on_date_time_manager_ticked"]

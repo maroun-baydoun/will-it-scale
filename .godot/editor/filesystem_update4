@@ -5,3 +5,7 @@ res://gui/date-time-display.tscn
 res://scripts/date-time-display.gd
 res://scripts/date-time-manager.gd
 res://scenes/main.tscn
+res://scripts/managers/traffic-manager.gd
+res://scripts/main.gd
+res://gui/statistics-panel.tscn
+res://scripts/statistics-panel.gd

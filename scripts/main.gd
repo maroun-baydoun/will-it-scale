@@ -1,15 +1,16 @@
 extends Node3D
 
 @onready var floor = $Floor
-@onready var server_container: ServerContiner = $Floor/ServerContainer
+@onready var server_container: ServerContiner = %ServerContainer
 
 @onready var server_scene: PackedScene = load("res://scenes/server.tscn")
 @onready var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
 
 @onready var date_time_manager: DateTimeManager = $DateTimeManager 
-@onready var statistics_panel: StatisticsPanel = $CanvasLayer/StatisticsPanel
-@onready var date_time_display: DateTimeDisplay = $CanvasLayer/DateTimeDisplay
+@onready var statistics_panel: StatisticsPanel = %StatisticsPanel
+@onready var date_time_display: DateTimeDisplay = %DateTimeDisplay
 @onready var finance_manager: FinanceManager = $FinanceManager
+@onready var traffic_manager := $TrafficManager
 
 
 var sessions: int
@@ -74,4 +75,6 @@ func _on_server_container_computing_power_updated(computing_power) -> void:
 
 func _on_date_time_manager_ticked(date_time: Dictionary) -> void:
 	date_time_display.current_date_time = date_time
+	traffic_manager.generate_traffic()
+	statistics_panel.current_load = traffic_manager.current_load
 
