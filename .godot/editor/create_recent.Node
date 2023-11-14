@@ -1,3 +1,5 @@
+Timer
+VBoxContainer
 Node
 HBoxContainer
 Label
@@ -6,9 +8,7 @@ CanvasLayer
 AnimationPlayer
 Label3D
 ColorRect
-VBoxContainer
 RichTextLabel
-Timer
 Control
 GPUParticles3D
 FogVolume

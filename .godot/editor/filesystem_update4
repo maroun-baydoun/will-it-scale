@@ -1,3 +1,7 @@
 res://scripts/grid-cell.gd
 res://scenes/server.tscn
 res://scripts/server.gd
+res://gui/date-time-display.tscn
+res://scripts/date-time-display.gd
+res://scripts/date-time-manager.gd
+res://scenes/main.tscn
