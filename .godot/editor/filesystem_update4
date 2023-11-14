@@ -1,1 +1,3 @@
 res://scripts/grid-cell.gd
+res://scenes/server.tscn
+res://scripts/server.gd
