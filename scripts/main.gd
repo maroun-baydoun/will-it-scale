@@ -11,7 +11,7 @@ extends Node3D
 @onready var date_time_display: DateTimeDisplay = %DateTimeDisplay
 @onready var finance_manager: FinanceManager = $FinanceManager
 @onready var traffic_manager := $TrafficManager
-
+@onready var power_manager := $PowerManager
 
 var sessions: int
 var computing_power_per_session: int = 10
@@ -67,7 +67,7 @@ func _on_grid_cell_clicked(cell: GridCell):
 	server.appear(cell.transform.origin)
 	
 	finance_manager.remove_funds(server.price)
-	
+	power_manager.increase_hourly_power_consumption(server.hourly_power_consumption)
 	
 func _on_server_container_computing_power_updated(computing_power) -> void:
 	statistics_panel.total_computing_power = computing_power
@@ -78,3 +78,11 @@ func _on_date_time_manager_ticked(date_time: Dictionary) -> void:
 	traffic_manager.generate_traffic()
 	statistics_panel.current_load = traffic_manager.current_load
 
+
+
+func _on_power_manager_hourly_power_consumption_decreased(amount: int) -> void:
+	statistics_panel.current_power_consumption = power_manager.current_hourly_power_consumption
+
+
+func _on_power_manager_hourly_power_consumption_increased(amount: int) -> void:
+	statistics_panel.current_power_consumption = power_manager.current_hourly_power_consumption

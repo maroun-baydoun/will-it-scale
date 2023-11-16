@@ -4,6 +4,7 @@ class_name StatisticsPanel
 @onready var current_funds_label:Label =  %CurrentFundsLabel
 @onready var total_computing_power_label:Label =  %TotalComputingPowerLabel
 @onready var current_load_label: Label = %CurrentLoadLabel
+@onready var current_power_consumption_label: Label = %CurrentPowerConsumptionLabel
 
 
 var current_funds:float:
@@ -14,8 +15,11 @@ var total_computing_power:int:
 	set(value):
 		total_computing_power_label.text = str(value)
 
-
 var current_load:int:
 	set(value):
 		current_load_label.text = str(value)
+		
+var current_power_consumption:int:
+	set(value):
+		current_power_consumption_label.text = str(value)
 		

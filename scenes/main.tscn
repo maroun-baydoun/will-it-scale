@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=18 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/managers/finance-manager.gd" id="6_k0lmj"]
 [ext_resource type="Script" path="res://scripts/managers/date-time-manager.gd" id="7_qrmsp"]
 [ext_resource type="Script" path="res://scripts/managers/traffic-manager.gd" id="8_ygmq4"]
+[ext_resource type="Script" path="res://scripts/managers/power-manager.gd" id="9_nl1t3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -131,6 +132,11 @@ script = ExtResource("7_qrmsp")
 [node name="TrafficManager" type="Node" parent="."]
 script = ExtResource("8_ygmq4")
 
+[node name="PowerManager" type="Node" parent="."]
+script = ExtResource("9_nl1t3")
+
 [connection signal="computing_power_updated" from="Floor/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
 [connection signal="ticked" from="DateTimeManager" to="." method="_on_date_time_manager_ticked"]
 [connection signal="timeout" from="DateTimeManager/GlobalTimer" to="DateTimeManager" method="_on_timer_timeout"]
+[connection signal="hourly_power_consumption_decreased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_decreased"]
+[connection signal="hourly_power_consumption_increased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_increased"]

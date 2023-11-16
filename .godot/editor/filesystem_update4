@@ -9,3 +9,4 @@ res://scripts/managers/traffic-manager.gd
 res://scripts/main.gd
 res://gui/statistics-panel.tscn
 res://scripts/statistics-panel.gd
+res://scripts/managers/power-manager.gd

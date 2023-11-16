@@ -5,6 +5,7 @@ class_name Server
 const INITIAL_COMPUTING_POWER: int = 100
 
 var computing_power: int = INITIAL_COMPUTING_POWER
+var hourly_power_consumption: int = 1 #kWh
 var price: int = 1000
 
 @onready var height: float = mesh.size.y
