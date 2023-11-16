@@ -10,3 +10,4 @@ res://scripts/main.gd
 res://gui/statistics-panel.tscn
 res://scripts/statistics-panel.gd
 res://scripts/managers/power-manager.gd
+res://scripts/managers/date-time-manager.gd

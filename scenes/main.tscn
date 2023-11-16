@@ -136,7 +136,7 @@ script = ExtResource("8_ygmq4")
 script = ExtResource("9_nl1t3")
 
 [connection signal="computing_power_updated" from="Floor/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
-[connection signal="ticked" from="DateTimeManager" to="." method="_on_date_time_manager_ticked"]
+[connection signal="time_advanced" from="DateTimeManager" to="." method="_on_time_advanced"]
 [connection signal="timeout" from="DateTimeManager/GlobalTimer" to="DateTimeManager" method="_on_timer_timeout"]
 [connection signal="hourly_power_consumption_decreased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_decreased"]
 [connection signal="hourly_power_consumption_increased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_increased"]

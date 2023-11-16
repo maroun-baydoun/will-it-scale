@@ -31,25 +31,20 @@ theme_override_constants/margin_bottom = 32
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="DateLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="DayLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_i6f01")
 theme_override_font_sizes/font_size = 32
-text = "11/11/2011
+text = "
 "
 
-[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="HourLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_i6f01")
 theme_override_font_sizes/font_size = 30
-text = "10:00
+text = "
 "
-
-[node name="MinutesTimer" type="Timer" parent="."]
-wait_time = 0.017
-
-[connection signal="timeout" from="MinutesTimer" to="." method="_on_minutes_timer_timeout"]

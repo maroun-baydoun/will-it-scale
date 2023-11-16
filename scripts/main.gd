@@ -73,16 +73,17 @@ func _on_server_container_computing_power_updated(computing_power) -> void:
 	statistics_panel.total_computing_power = computing_power
 
 
-func _on_date_time_manager_ticked(date_time: Dictionary) -> void:
-	date_time_display.current_date_time = date_time
-	traffic_manager.generate_traffic()
-	statistics_panel.current_load = traffic_manager.current_load
-
-
-
 func _on_power_manager_hourly_power_consumption_decreased(amount: int) -> void:
 	statistics_panel.current_power_consumption = power_manager.current_hourly_power_consumption
 
 
 func _on_power_manager_hourly_power_consumption_increased(amount: int) -> void:
 	statistics_panel.current_power_consumption = power_manager.current_hourly_power_consumption
+
+
+func _on_time_advanced(hour, day) -> void:
+	date_time_display.current_hour = hour
+	date_time_display.current_day = day
+	
+	traffic_manager.generate_traffic()
+	statistics_panel.current_load = traffic_manager.current_load
