@@ -1,3 +1,9 @@
+StaticBody3D
+MeshInstance3D
+AnimatableBody3D
+CollisionShape3D
+Node3D
+Area3D
 Node
 Timer
 VBoxContainer
@@ -12,12 +18,9 @@ RichTextLabel
 Control
 GPUParticles3D
 FogVolume
-MeshInstance3D
 OmniLight3D
-Node3D
 GridMap
 Sprite3D
 Sprite2D
-Area3D
 SpotLight3D
 Camera3D

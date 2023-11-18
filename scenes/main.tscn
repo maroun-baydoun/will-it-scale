@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=19 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/managers/date-time-manager.gd" id="7_qrmsp"]
 [ext_resource type="Script" path="res://scripts/managers/traffic-manager.gd" id="8_ygmq4"]
 [ext_resource type="Script" path="res://scripts/managers/power-manager.gd" id="9_nl1t3"]
+[ext_resource type="PackedScene" uid="uid://c137nllk5qnqt" path="res://scenes/cloud.tscn" id="10_s42rh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -25,7 +26,6 @@ ambient_light_source = 2
 ambient_light_color = Color(0.760784, 0.760784, 0.760784, 1)
 ambient_light_energy = 0.7
 tonemap_white = 10.58
-glow_enabled = true
 glow_normalized = true
 glow_intensity = 0.9
 glow_strength = 0.69
@@ -34,13 +34,14 @@ glow_hdr_threshold = 0.9
 glow_hdr_scale = 0.0
 glow_hdr_luminance_cap = 2.3
 glow_map_strength = 0.0
-fog_enabled = true
-fog_light_color = Color(0.211765, 0.486275, 1, 1)
-fog_sun_scatter = 0.82
-fog_height = -0.2
-fog_height_density = 1.7391
-volumetric_fog_emission_energy = 6.0
-volumetric_fog_length = 82.5
+fog_light_color = Color(0, 0.262745, 0.709804, 1)
+fog_height = -2.0
+fog_height_density = 3.7647
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.07
+volumetric_fog_albedo = Color(0.054902, 0.301961, 0.47451, 1)
+volumetric_fog_emission = Color(0.341176, 0.529412, 1, 1)
+volumetric_fog_length = 30.0
 adjustment_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjept"]
@@ -63,20 +64,23 @@ metallic = 0.37
 
 [sub_resource type="BoxMesh" id="BoxMesh_36swf"]
 material = SubResource("StandardMaterial3D_kji3e")
-size = Vector3(4, 10, 4)
+size = Vector3(4, 2, 4)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_nvayq")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.453991, -1.52425e-16, -0.891006, 3.48787e-16, 1, -3.48787e-16, 0.891006, -4.69117e-16, -0.453991, 0, 0, 0)
+light_color = Color(0.960784, 0.894118, 0.54902, 1)
+light_energy = 2.0
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 3.0
+shadow_enabled = true
+directional_shadow_mode = 0
+sky_mode = 1
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5qu0w")
-
-[node name="Light" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.963434, 0.168605, -0.208247, 4.00983e-16, 0.777201, 0.629253, 0.267945, -0.606243, 0.748782, 2.08165e-12, 6.96362, 4.18115)
-light_color = Color(0.945098, 0.941176, 0.996078, 1)
-shadow_enabled = true
-shadow_opacity = 0.6
-sky_mode = 1
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_mo708")
@@ -90,7 +94,7 @@ shape = SubResource("ConcavePolygonShape3D_tpmab")
 unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.0061, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.01, 2.08165e-12)
 mesh = SubResource("BoxMesh_36swf")
 skeleton = NodePath("../..")
 
@@ -103,15 +107,16 @@ projection = 1
 current = true
 fov = 67.8
 size = 5.0
-near = 1.0
 far = 30.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(0.820583, -0.555437, 0.134663, 0.553442, 0.831048, 0.0553243, -0.142641, 0.0291302, 0.989346, -0.044, 4.20557, -7.81128)
-light_energy = 2.831
+transform = Transform3D(0.820583, -0.555437, 0.134663, 0.553442, 0.831048, 0.0553244, -0.142641, 0.0291301, 0.989346, -0.044, 8.18164, -0.184754)
+light_color = Color(0.945098, 0.882353, 0.698039, 1)
+light_energy = 8.0
 light_specular = 0.4
+shadow_enabled = true
 shadow_opacity = 0.4
-omni_range = 19.8667
+omni_range = 13.6197
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -134,6 +139,16 @@ script = ExtResource("8_ygmq4")
 
 [node name="PowerManager" type="Node" parent="."]
 script = ExtResource("9_nl1t3")
+
+[node name="CloudContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2, 2.08165e-12)
+
+[node name="Cloud1" parent="CloudContainer" instance=ExtResource("10_s42rh")]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 7.91846, 0, -6.86938)
+
+[node name="Cloud2" parent="CloudContainer" instance=ExtResource("10_s42rh")]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -5.7262, 0, 8.67328)
+move_direction = -1
 
 [connection signal="computing_power_updated" from="Floor/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
 [connection signal="time_advanced" from="DateTimeManager" to="." method="_on_time_advanced"]
