@@ -3,6 +3,8 @@ class_name Toolbar
 
 signal zoomed_out
 signal zoomed_in
+signal rotated_left
+signal rotated_right
 
 @onready var zoom_out_button: Button = %ZoomOutButton
 @onready var zoom_in_button: Button = %ZoomInButton
@@ -25,3 +27,11 @@ func _on_zoom_out_button_pressed() -> void:
 
 func _on_zoom_in_button_pressed() -> void:
 	zoomed_in.emit()
+
+
+func _on_rotate_left_button_pressed() -> void:
+	rotated_left.emit()
+
+
+func _on_rotate_right_button_pressed() -> void:
+	rotated_right.emit()

@@ -132,6 +132,12 @@ material_override = SubResource("StandardMaterial3D_fneya")
 mesh = ExtResource("2_p8csb")
 skeleton = NodePath("../..")
 
+[connection signal="max_zoom_in_reached" from="CameraController" to="." method="_on_camera_controller_max_zoom_in_reached"]
+[connection signal="max_zoom_out_reached" from="CameraController" to="." method="_on_camera_controller_max_zoom_out_reached"]
+[connection signal="zoomed_in" from="CameraController" to="." method="_on_camera_controller_zoomed_in"]
+[connection signal="zoomed_out" from="CameraController" to="." method="_on_camera_controller_zoomed_out"]
+[connection signal="rotated_left" from="CanvasLayer/Toolbar" to="." method="_on_toolbar_rotated_left"]
+[connection signal="rotated_right" from="CanvasLayer/Toolbar" to="." method="_on_toolbar_rotated_right"]
 [connection signal="zoomed_in" from="CanvasLayer/Toolbar" to="." method="_on_toolbar_zoomed_in"]
 [connection signal="zoomed_out" from="CanvasLayer/Toolbar" to="." method="_on_toolbar_zoomed_out"]
 [connection signal="time_advanced" from="DateTimeManager" to="." method="_on_time_advanced"]

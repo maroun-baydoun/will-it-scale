@@ -1,6 +1,11 @@
 extends Node3D
 class_name CameraController
 
+signal zoomed_in
+signal zoomed_out
+signal max_zoom_out_reached
+signal max_zoom_in_reached
+
 const MAX_CAMERA_SIZE: int = 10
 const MIN_CAMERA_SIZE: int = 2
 
@@ -8,18 +13,38 @@ const MIN_CAMERA_SIZE: int = 2
 
 func zoom_in() -> void:
 	if can_zoom_in():
-		#camera.size -=1
-		get_tree().create_tween().tween_property(camera, "size", camera.size - 1, 0.2)
-	
+		var tween = get_tree().create_tween()
+		tween.tween_property(camera, "size", camera.size - 1, 0.1)
+		tween.tween_callback(func (): 
+			if !can_zoom_in():
+				max_zoom_in_reached.emit()
+			else:
+				zoomed_in.emit()
+		)
+
 func zoom_out() -> void:
 	if can_zoom_out():
-		get_tree().create_tween().tween_property(camera, "size", camera.size + 1, 0.2)
-	
+		var tween = get_tree().create_tween()
+		tween.tween_property(camera, "size", camera.size + 1, 0.1)
+		tween.tween_callback(func (): 
+			if !can_zoom_out():
+				max_zoom_out_reached.emit()
+			else:
+				zoomed_out.emit()
+		)
+
 func can_zoom_out() -> bool:
 	return camera.size < MAX_CAMERA_SIZE
 	
 func can_zoom_in() -> bool:
 	return camera.size > MIN_CAMERA_SIZE
+	
+func rotate_left() -> void:
+	get_tree().create_tween().tween_property(self, "rotation_degrees:y", rotation_degrees.y - 45, 0.2)
+	
+func rotate_right() -> void:
+	get_tree().create_tween().tween_property(self, "rotation_degrees:y", rotation_degrees.y + 45, 0.2)
+	
 
 func _unhandled_input(event):
 	if event.is_action_pressed("zoom_in"):
@@ -30,5 +55,5 @@ func _unhandled_input(event):
 		
 	if event is InputEventMouseMotion:
 		if event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
-			rotate(Vector3(0, 1,0),event.relative.x * -0.002)
+			rotate(Vector3(0,1,0),event.relative.x * -0.002)
 

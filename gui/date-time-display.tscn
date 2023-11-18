@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://burvuv1q1oe1t"]
+[gd_scene load_steps=5 format=3 uid="uid://burvuv1q1oe1t"]
 
 [ext_resource type="Script" path="res://scripts/date-time-display.gd" id="1_jtxx4"]
 [ext_resource type="FontFile" uid="uid://cwxxvels6k7tt" path="res://assets/fonts/NotoSansMono-Regular.ttf" id="2_i6f01"]
 [ext_resource type="Texture2D" uid="uid://dqbygo20rnmob" path="res://assets/icons/pause.svg" id="3_3u462"]
+[ext_resource type="Theme" uid="uid://b6h58sqqjjw4q" path="res://theme.tres" id="3_q2v6x"]
 
 [node name="date-time-display" type="Control"]
 layout_mode = 3
@@ -56,6 +57,7 @@ alignment = 2
 unique_name_in_owner = true
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("3_q2v6x")
 icon = ExtResource("3_3u462")
 flat = true
 icon_alignment = 2

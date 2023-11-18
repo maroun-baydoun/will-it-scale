@@ -91,16 +91,35 @@ func _on_time_advanced(hour, day) -> void:
 
 
 func _on_toolbar_zoomed_in() -> void:
-	if camera_controller.can_zoom_in():
-		camera_controller.zoom_in()
-		toolbar.enable_zoom_out_button()
-	else:
-		toolbar.disable_zoom_in_button()
+	camera_controller.zoom_in()
+
 
 
 func _on_toolbar_zoomed_out() -> void:
-	if camera_controller.can_zoom_out():
-		camera_controller.zoom_out()
-		toolbar.enable_zoom_in_button()
-	else:
-		toolbar.disable_zoom_out_button()
+	camera_controller.zoom_out()
+
+
+func _on_camera_controller_zoomed_in() -> void:
+	toolbar.enable_zoom_out_button()
+	
+
+
+func _on_camera_controller_zoomed_out() -> void:
+	toolbar.enable_zoom_in_button()
+	
+
+
+func _on_camera_controller_max_zoom_out_reached() -> void:
+	toolbar.disable_zoom_out_button()
+
+
+func _on_camera_controller_max_zoom_in_reached() -> void:
+	toolbar.disable_zoom_in_button()
+
+
+func _on_toolbar_rotated_left() -> void:
+	camera_controller.rotate_left()
+
+
+func _on_toolbar_rotated_right() -> void:
+	camera_controller.rotate_right()
