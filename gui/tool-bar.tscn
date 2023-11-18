@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://b62hm8m5in5xi"]
+
+[ext_resource type="Texture2D" uid="uid://dboabeix1iem5" path="res://assets/icons/zoom-out.svg" id="1_3w6c5"]
+[ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="1_e7fwb"]
+[ext_resource type="Script" path="res://scripts/tool-bar.gd" id="1_idvxu"]
+[ext_resource type="Texture2D" uid="uid://dlt65avckgadx" path="res://assets/icons/zoom-in.svg" id="3_op7qg"]
+[ext_resource type="Theme" uid="uid://b6h58sqqjjw4q" path="res://theme.tres" id="3_y166l"]
+
+[node name="Toolbar" type="Control"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_idvxu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.870588, 0.905882, 0.686275, 0.231373)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -57.0
+offset_right = 296.0
+offset_bottom = 57.0
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ZoomOutButton" type="Button" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_y166l")
+icon = ExtResource("1_3w6c5")
+flat = true
+
+[node name="ZoomLabel" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_e7fwb")
+theme_override_font_sizes/font_size = 32
+text = "Zoom"
+
+[node name="ZoomInButton" type="Button" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_y166l")
+icon = ExtResource("3_op7qg")
+flat = true
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/HBoxContainer/ZoomOutButton" to="." method="_on_zoom_out_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/HBoxContainer/ZoomInButton" to="." method="_on_zoom_in_button_pressed"]

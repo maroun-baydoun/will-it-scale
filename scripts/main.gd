@@ -1,6 +1,6 @@
 extends Node3D
 
-
+@onready var camera_controller: CameraController = $CameraController
 @onready var server_container: ServerContiner = %ServerContainer
 @onready var platform_mesh : MeshInstance3D = %PlatformMesh
 @onready var server_scene: PackedScene = load("res://scenes/server.tscn")
@@ -8,6 +8,7 @@ extends Node3D
 
 @onready var date_time_manager: DateTimeManager = $DateTimeManager 
 @onready var statistics_panel: StatisticsPanel = %StatisticsPanel
+@onready var toolbar: Toolbar = %Toolbar
 @onready var date_time_display: DateTimeDisplay = %DateTimeDisplay
 @onready var finance_manager: FinanceManager = $FinanceManager
 @onready var traffic_manager := $TrafficManager
@@ -87,3 +88,19 @@ func _on_time_advanced(hour, day) -> void:
 	
 	traffic_manager.generate_traffic()
 	statistics_panel.current_load = traffic_manager.current_load
+
+
+func _on_toolbar_zoomed_in() -> void:
+	if camera_controller.can_zoom_in():
+		camera_controller.zoom_in()
+		toolbar.enable_zoom_out_button()
+	else:
+		toolbar.disable_zoom_in_button()
+
+
+func _on_toolbar_zoomed_out() -> void:
+	if camera_controller.can_zoom_out():
+		camera_controller.zoom_out()
+		toolbar.enable_zoom_in_button()
+	else:
+		toolbar.disable_zoom_out_button()

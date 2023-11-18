@@ -1,0 +1,4 @@
+[gd_resource type="Theme" format=3 uid="uid://b6h58sqqjjw4q"]
+
+[resource]
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=17 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/managers/traffic-manager.gd" id="8_ygmq4"]
 [ext_resource type="Script" path="res://scripts/managers/power-manager.gd" id="9_nl1t3"]
 [ext_resource type="PackedScene" uid="uid://c137nllk5qnqt" path="res://scenes/cloud.tscn" id="10_s42rh"]
+[ext_resource type="PackedScene" uid="uid://b62hm8m5in5xi" path="res://gui/tool-bar.tscn" id="12_gomch"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -64,15 +65,15 @@ sky_mode = 1
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5qu0w")
 
-[node name="CameraContainer" type="Node3D" parent="."]
+[node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("3_i8ue0")
 
-[node name="Camera3D" type="Camera3D" parent="CameraContainer"]
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
 transform = Transform3D(-0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, 0.5, -0.5, -2.01485, 2.76879, -1.97786)
 projection = 1
 current = true
 fov = 67.8
-size = 5.0
+size = 6.0
 far = 30.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -90,6 +91,9 @@ omni_range = 13.6197
 unique_name_in_owner = true
 
 [node name="DateTimeDisplay" parent="CanvasLayer" instance=ExtResource("6_bcuad")]
+unique_name_in_owner = true
+
+[node name="Toolbar" parent="CanvasLayer" instance=ExtResource("12_gomch")]
 unique_name_in_owner = true
 
 [node name="FinanceManager" type="Node" parent="."]
@@ -128,6 +132,8 @@ material_override = SubResource("StandardMaterial3D_fneya")
 mesh = ExtResource("2_p8csb")
 skeleton = NodePath("../..")
 
+[connection signal="zoomed_in" from="CanvasLayer/Toolbar" to="." method="_on_toolbar_zoomed_in"]
+[connection signal="zoomed_out" from="CanvasLayer/Toolbar" to="." method="_on_toolbar_zoomed_out"]
 [connection signal="time_advanced" from="DateTimeManager" to="." method="_on_time_advanced"]
 [connection signal="timeout" from="DateTimeManager/GlobalTimer" to="DateTimeManager" method="_on_timer_timeout"]
 [connection signal="hourly_power_consumption_decreased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_decreased"]
