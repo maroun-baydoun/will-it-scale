@@ -3,6 +3,10 @@ class_name DateTimeDisplay
 
 @onready var day_label: Label = %DayLabel
 @onready var hour_label: Label = %HourLabel
+@onready var pause_button: Button = %PauseButton
+
+@onready var pause_icon: CompressedTexture2D = load("res://assets/icons/pause.svg")
+@onready var play_icon: CompressedTexture2D = load("res://assets/icons/play.svg")
 
 
 const DAY_FORMAT: String = "Day: %s"
@@ -29,3 +33,13 @@ func _update_hour_label_text() -> void:
 
 func _left_pad_with_zero(number: int) -> String:
 	return ZERO_PADDED_FORMAT % number if number <10 else str(number)
+
+
+func _on_pause_button_pressed() -> void:
+	var is_paused := !get_tree().paused 
+	get_tree().paused = is_paused
+	
+	if is_paused:
+		pause_button.icon = play_icon
+	else:
+		pause_button.icon = pause_icon

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://burvuv1q1oe1t"]
+[gd_scene load_steps=4 format=3 uid="uid://burvuv1q1oe1t"]
 
 [ext_resource type="Script" path="res://scripts/date-time-display.gd" id="1_jtxx4"]
 [ext_resource type="FontFile" uid="uid://cwxxvels6k7tt" path="res://assets/fonts/NotoSansMono-Regular.ttf" id="2_i6f01"]
+[ext_resource type="Texture2D" uid="uid://dqbygo20rnmob" path="res://assets/icons/pause.svg" id="3_3u462"]
 
 [node name="date-time-display" type="Control"]
 layout_mode = 3
@@ -37,8 +38,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_i6f01")
 theme_override_font_sizes/font_size = 32
-text = "
-"
+text = "0"
 
 [node name="HourLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -46,5 +46,18 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_i6f01")
 theme_override_font_sizes/font_size = 30
-text = "
-"
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="PauseButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+icon = ExtResource("3_3u462")
+flat = true
+icon_alignment = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
