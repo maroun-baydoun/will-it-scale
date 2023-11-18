@@ -4,3 +4,7 @@ res://gui/date-time-display.tscn
 res://scenes/cloud.tscn
 res://scripts/cloud-container.gd
 res://scripts/cloud.gd
+res://scenes/server-container.tscn
+res://scripts/main.gd
+res://scripts/server.gd
+res://scenes/grid-cell.tscn

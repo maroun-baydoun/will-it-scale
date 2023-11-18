@@ -1,8 +1,8 @@
 extends Node3D
 
-@onready var floor = $Floor
-@onready var server_container: ServerContiner = %ServerContainer
 
+@onready var server_container: ServerContiner = %ServerContainer
+@onready var platform_mesh : MeshInstance3D = %PlatformMesh
 @onready var server_scene: PackedScene = load("res://scenes/server.tscn")
 @onready var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
 
@@ -18,13 +18,13 @@ var computing_power_per_session: int = 10
 
 
 func _ready():
-	const Z = 0.015
+	const Y := 1.0001
 	
 	var origins = []
 	
 	for i in range(-2, 3):
 		for j in range(-2, 3):
-			origins.append(Vector3(0.7 * i, Z ,0.7 * j))
+			origins.append(Vector3(0.65 * i, Y ,0.65 * j))
 		
 
 	var index: int = 0
@@ -36,7 +36,7 @@ func _ready():
 		
 		grid_cell.clicked.connect(_on_grid_cell_clicked)
 		
-		floor.add_child(grid_cell)
+		platform_mesh.add_child(grid_cell)
 		
 		index+=1
 		

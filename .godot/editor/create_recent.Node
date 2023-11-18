@@ -1,8 +1,8 @@
+Node3D
 StaticBody3D
 MeshInstance3D
 AnimatableBody3D
 CollisionShape3D
-Node3D
 Area3D
 Node
 Timer

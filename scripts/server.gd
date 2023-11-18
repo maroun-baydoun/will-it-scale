@@ -20,8 +20,7 @@ func appear(origin: Vector3):
 	var tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	
-	tween.tween_property(self, "transform:origin:y", height / 2, 0.5)
-	
+	tween.tween_property(self, "transform:origin:y", height / 2 , 0.5)
 
 	animate_price()
 
