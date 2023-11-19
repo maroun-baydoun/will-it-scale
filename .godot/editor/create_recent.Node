@@ -1,3 +1,5 @@
+HSeparator
+VBoxContainer
 Control
 Container
 PanelContainer
@@ -16,7 +18,6 @@ CollisionShape3D
 Area3D
 Node
 Timer
-VBoxContainer
 CanvasLayer
 AnimationPlayer
 Label3D

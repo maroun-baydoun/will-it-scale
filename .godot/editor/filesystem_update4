@@ -13,3 +13,4 @@ res://gui/tool-bar.tscn
 res://theme.tres
 res://scripts/tool-bar.gd
 res://scripts/camera-controller.gd
+res://scripts/managers/traffic-manager.gd

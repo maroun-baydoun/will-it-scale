@@ -4,9 +4,8 @@ class_name DateTimeDisplay
 @onready var day_label: Label = %DayLabel
 @onready var hour_label: Label = %HourLabel
 @onready var pause_button: Button = %PauseButton
-
-@onready var pause_icon: CompressedTexture2D = load("res://assets/icons/pause.svg")
-@onready var play_icon: CompressedTexture2D = load("res://assets/icons/play.svg")
+@onready var play_button: Button = %PlayButton
+@onready var fast_forward_button: Button = %FastForwardButton
 
 
 const DAY_FORMAT: String = "Day: %s"
@@ -36,10 +35,27 @@ func _left_pad_with_zero(number: int) -> String:
 
 
 func _on_pause_button_pressed() -> void:
-	var is_paused := !get_tree().paused 
-	get_tree().paused = is_paused
+	get_tree().paused = true
 	
-	if is_paused:
-		pause_button.icon = play_icon
-	else:
-		pause_button.icon = pause_icon
+	play_button.disabled = false
+	fast_forward_button.disabled = false
+	pause_button.disabled = true
+	
+
+func _on_play_button_pressed() -> void:
+	get_tree().paused = false
+	Engine.time_scale = 1.0
+	
+	play_button.disabled = true
+	pause_button.disabled = false
+	fast_forward_button.disabled = false
+
+
+func _on_fast_forward_button_pressed() -> void:
+	get_tree().paused = false
+	Engine.time_scale = 20.0
+	
+	fast_forward_button.disabled = true
+	play_button.disabled = false
+	pause_button.disabled = false
+

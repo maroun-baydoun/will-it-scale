@@ -86,7 +86,7 @@ func _on_time_advanced(hour, day) -> void:
 	date_time_display.current_hour = hour
 	date_time_display.current_day = day
 	
-	traffic_manager.generate_traffic()
+	traffic_manager.generate_traffic(server_container.total_computing_power, date_time_manager.current_day)
 	statistics_panel.current_load = traffic_manager.current_load
 
 
