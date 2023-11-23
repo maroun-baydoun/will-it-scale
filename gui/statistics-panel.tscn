@@ -1,138 +1,150 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmci4bg3dbcar"]
+[gd_scene load_steps=6 format=3 uid="uid://bmci4bg3dbcar"]
 
 [ext_resource type="Script" path="res://scripts/statistics-panel.gd" id="1_5sauv"]
-[ext_resource type="FontFile" uid="uid://cwxxvels6k7tt" path="res://assets/fonts/NotoSansMono-Regular.ttf" id="1_yb4qv"]
 [ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="2_8vech"]
+[ext_resource type="Texture2D" uid="uid://chsi33fyc15ep" path="res://assets/icons/funds.svg" id="3_jqg7q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56m0e"]
+bg_color = Color(0.501961, 0.572549, 0.913725, 0)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsm8d"]
+content_margin_left = 5.0
+content_margin_top = 10.0
+content_margin_right = 5.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0431373, 0.0117647, 0.168627, 0.0980392)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
 
 [node name="statistics-panel" type="Control"]
 layout_mode = 3
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 430.0
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("1_5sauv")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 32
+grow_vertical = 0
+mouse_filter = 1
+script = ExtResource("1_5sauv")
+
+[node name="ColorRect" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -160.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_56m0e")
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 2
+theme_override_constants/margin_left = 42
 theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
+theme_override_constants/margin_right = 42
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer"]
+custom_minimum_size = Vector2(800, 2.08165e-12)
 layout_mode = 2
-theme_override_constants/separation = 75
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 42
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 10
-
-[node name="Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_yb4qv")
-theme_override_fonts/bold_font = ExtResource("2_8vech")
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 32
-theme_override_font_sizes/bold_italics_font_size = 6
-theme_override_font_sizes/mono_font_size = 20
-bbcode_enabled = true
-text = "[b]Funds[/b]"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="CurrentFundsLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer3"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_yb4qv")
-theme_override_font_sizes/font_size = 52
-text = "0
-"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_fsm8d")
 
-[node name="Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_yb4qv")
-theme_override_fonts/bold_font = ExtResource("2_8vech")
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 32
-theme_override_font_sizes/bold_italics_font_size = 6
-theme_override_font_sizes/mono_font_size = 20
-bbcode_enabled = true
-text = "[b]Computing power[/b]"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
+theme_override_constants/separation = 16
 
-[node name="TotalComputingPowerLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Funds"
+mouse_default_cursor_shape = 16
+texture = ExtResource("3_jqg7q")
+stretch_mode = 4
+
+[node name="CurrentFundsLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_yb4qv")
-theme_override_font_sizes/font_size = 52
-text = "0"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 10
-
-[node name="Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_yb4qv")
-theme_override_fonts/bold_font = ExtResource("2_8vech")
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 32
-theme_override_font_sizes/bold_italics_font_size = 6
-theme_override_font_sizes/mono_font_size = 20
-bbcode_enabled = true
-text = "[b]Load[/b]"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="CurrentLoadLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_yb4qv")
-theme_override_font_sizes/font_size = 52
-text = "0"
-
-[node name="VBoxContainer4" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 10
-
-[node name="Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer/VBoxContainer4"]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_yb4qv")
-theme_override_fonts/bold_font = ExtResource("2_8vech")
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 32
-theme_override_font_sizes/bold_italics_font_size = 6
-theme_override_font_sizes/mono_font_size = 20
-bbcode_enabled = true
-text = "[b]Power consumption[/b]"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="CurrentPowerConsumptionLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer4"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_yb4qv")
-theme_override_font_sizes/font_size = 52
-text = "0"
-
-[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_8vech")
 theme_override_font_sizes/font_size = 36
+text = "0"
+
+[node name="PanelContainer2" type="PanelContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_fsm8d")
+
+[node name="TextureRect2" type="TextureRect" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+tooltip_text = "Funds"
+mouse_default_cursor_shape = 16
+texture = ExtResource("3_jqg7q")
+stretch_mode = 4
+
+[node name="TotalComputingPowerLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_8vech")
+theme_override_font_sizes/font_size = 36
+text = "0"
+
+[node name="PanelContainer3" type="PanelContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_fsm8d")
+
+[node name="TextureRect3" type="TextureRect" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Funds"
+mouse_default_cursor_shape = 16
+texture = ExtResource("3_jqg7q")
+stretch_mode = 4
+
+[node name="CurrentLoadLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_8vech")
+theme_override_font_sizes/font_size = 36
+text = "0"
+
+[node name="PanelContainer4" type="PanelContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_fsm8d")
+
+[node name="TextureRect4" type="TextureRect" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer4"]
+layout_mode = 2
+tooltip_text = "Funds"
+mouse_default_cursor_shape = 16
+texture = ExtResource("3_jqg7q")
+stretch_mode = 4
+
+[node name="CurrentPowerConsumptionLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_8vech")
+theme_override_font_sizes/font_size = 36
+text = "0"

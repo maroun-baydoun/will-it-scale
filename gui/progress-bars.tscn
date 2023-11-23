@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://hyt16u7pa1xx"]
+
+[ext_resource type="Script" path="res://scripts/progress-bars.gd" id="1_ugx6x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_piqsq"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.164706, 0.313726, 0.611765, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Gradient" id="Gradient_m4xay"]
+offsets = PackedFloat32Array(0.0253165)
+colors = PackedColorArray(0.0235294, 0.258824, 1, 0.360784)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_088d2"]
+gradient = SubResource("Gradient_m4xay")
+width = 600
+
+[sub_resource type="Gradient" id="Gradient_45xm8"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.976471, 0.262745, 0.215686, 0.835294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hph3f"]
+gradient = SubResource("Gradient_45xm8")
+width = 600
+
+[node name="ProgressBars" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ugx6x")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 600.0
+offset_bottom = 96.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_piqsq")
+
+[node name="UserFrustrationProgressBar" type="TextureProgressBar" parent="MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 2
+max_value = 1000.0
+texture_under = SubResource("GradientTexture2D_088d2")
+texture_progress = SubResource("GradientTexture2D_hph3f")

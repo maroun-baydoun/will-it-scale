@@ -10,9 +10,11 @@ extends Node3D
 @onready var statistics_panel: StatisticsPanel = %StatisticsPanel
 @onready var toolbar: Toolbar = %Toolbar
 @onready var date_time_display: DateTimeDisplay = %DateTimeDisplay
+@onready var progress_bars: ProgressBars = %ProgressBars
 @onready var finance_manager: FinanceManager = $FinanceManager
 @onready var traffic_manager := $TrafficManager
 @onready var power_manager := $PowerManager
+@onready var user_frustration_manager := $UserFrustrationManager
 
 var sessions: int
 var computing_power_per_session: int = 10
@@ -88,6 +90,7 @@ func _on_time_advanced(hour, day) -> void:
 	
 	traffic_manager.generate_traffic(server_container.total_computing_power, date_time_manager.current_day)
 	statistics_panel.current_load = traffic_manager.current_load
+	user_frustration_manager.current_load_ratio = traffic_manager.current_load_ratio
 
 
 func _on_toolbar_zoomed_in() -> void:
@@ -123,3 +126,11 @@ func _on_toolbar_rotated_left() -> void:
 
 func _on_toolbar_rotated_right() -> void:
 	camera_controller.rotate_right()
+
+
+func _on_user_user_frustration_increased(amount: float) -> void:
+	progress_bars.user_frustration = user_frustration_manager.user_frustration
+
+
+func _on_user_frustration_decreased(amount: float) -> void:
+	progress_bars.user_frustration = user_frustration_manager.user_frustration

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=19 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://scripts/managers/date-time-manager.gd" id="7_qrmsp"]
 [ext_resource type="Script" path="res://scripts/managers/traffic-manager.gd" id="8_ygmq4"]
 [ext_resource type="Script" path="res://scripts/managers/power-manager.gd" id="9_nl1t3"]
+[ext_resource type="Script" path="res://scripts/managers/user-frustration-manager.gd" id="10_rw5m7"]
 [ext_resource type="PackedScene" uid="uid://c137nllk5qnqt" path="res://scenes/cloud.tscn" id="10_s42rh"]
 [ext_resource type="PackedScene" uid="uid://b62hm8m5in5xi" path="res://gui/tool-bar.tscn" id="12_gomch"]
+[ext_resource type="PackedScene" uid="uid://hyt16u7pa1xx" path="res://gui/progress-bars.tscn" id="14_uatj1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -96,6 +98,9 @@ unique_name_in_owner = true
 [node name="Toolbar" parent="CanvasLayer" instance=ExtResource("12_gomch")]
 unique_name_in_owner = true
 
+[node name="ProgressBars" parent="CanvasLayer" instance=ExtResource("14_uatj1")]
+unique_name_in_owner = true
+
 [node name="FinanceManager" type="Node" parent="."]
 script = ExtResource("6_k0lmj")
 
@@ -109,6 +114,11 @@ script = ExtResource("8_ygmq4")
 
 [node name="PowerManager" type="Node" parent="."]
 script = ExtResource("9_nl1t3")
+
+[node name="UserFrustrationManager" type="Node" parent="."]
+script = ExtResource("10_rw5m7")
+
+[node name="Timer" type="Timer" parent="UserFrustrationManager"]
 
 [node name="CloudContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2, 2.08165e-12)
@@ -144,4 +154,7 @@ skeleton = NodePath("../..")
 [connection signal="timeout" from="DateTimeManager/GlobalTimer" to="DateTimeManager" method="_on_timer_timeout"]
 [connection signal="hourly_power_consumption_decreased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_decreased"]
 [connection signal="hourly_power_consumption_increased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_increased"]
+[connection signal="user_frustration_decreased" from="UserFrustrationManager" to="." method="_on_user_frustration_decreased"]
+[connection signal="user_frustration_increased" from="UserFrustrationManager" to="." method="_on_user_user_frustration_increased"]
+[connection signal="timeout" from="UserFrustrationManager/Timer" to="UserFrustrationManager" method="_on_timer_timeout"]
 [connection signal="computing_power_updated" from="Platform/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
