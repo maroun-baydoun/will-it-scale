@@ -16,7 +16,8 @@ func start() -> void:
 	time_advanced.emit(current_hour, current_day)
 	timer.start()
 	
-	
+func stop() -> void:
+	timer.stop()
 
 func _on_timer_timeout() -> void:
 	time_elapsed_in_second += 1

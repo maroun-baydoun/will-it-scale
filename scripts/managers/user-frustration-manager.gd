@@ -3,6 +3,7 @@ class_name UserFrustrationManager
 
 signal user_frustration_increased(amount: float)
 signal user_frustration_decreased(amount: float)
+signal user_frustration_max_reached
 
 @onready var timer: Timer = $Timer
 
@@ -24,8 +25,11 @@ var current_load_ratio := 0.0 :
 			user_frustration_growth_direction = USER_FRUSTRATION_GROWTH_DIRECTION.DECREASE
 
 
-func _ready():
+func start() -> void:
 	timer.start()
+	
+func stop() -> void:
+	timer.stop()
 
 func increase(amount: float) -> void:
 	user_frustration += amount
@@ -43,3 +47,6 @@ func _on_timer_timeout() -> void:
 		
 	if user_frustration_growth_direction == USER_FRUSTRATION_GROWTH_DIRECTION.DECREASE and user_frustration >= USER_FRUSTRATION_DELTA:
 		decrease(USER_FRUSTRATION_DELTA)
+		
+	if user_frustration == MAX_USER_FRUSTRATION:
+		user_frustration_max_reached.emit()

@@ -5,3 +5,6 @@ res://scripts/main.gd
 res://gui/progress-bars.tscn
 res://gui/tool-bar.tscn
 res://scripts/progress-bars.gd
+res://gui/game-over.tscn
+res://scripts/game-over.gd
+res://scripts/managers/date-time-manager.gd
