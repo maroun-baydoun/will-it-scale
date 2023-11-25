@@ -10,12 +10,13 @@ extends Node3D
 @onready var progress_bars: ProgressBars = %ProgressBars
 @onready var gui_layer: CanvasLayer = $GuiLayer
 
-@onready var date_time_manager: DateTimeManager = $DateTimeManager 
-@onready var finance_manager: FinanceManager = $FinanceManager
-@onready var traffic_manager := $TrafficManager
-@onready var power_manager := $PowerManager
-@onready var user_frustration_manager := $UserFrustrationManager
-@onready var response_time_manager := $ReponseTimeManager
+@onready var date_time_manager: DateTimeManager = %DateTimeManager 
+@onready var finance_manager: FinanceManager = %FinanceManager
+@onready var revenue_manager: RevenueManager = %RevenueManager
+@onready var traffic_manager := %TrafficManager
+@onready var power_manager := %PowerManager
+@onready var user_frustration_manager := %UserFrustrationManager
+@onready var response_time_manager := %ReponseTimeManager
 
 @onready var server_scene: PackedScene = load("res://scenes/server.tscn")
 @onready var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
@@ -110,10 +111,13 @@ func _on_time_advanced(hour:int, day:int) -> void:
 	date_time_display.current_day = day
 	
 	traffic_manager.generate_traffic(server_container.total_computing_power, date_time_manager.current_day)
-	statistics_panel.current_load = traffic_manager.current_load
 	response_time_manager.current_load_ratio = traffic_manager.current_load_ratio
 	user_frustration_manager.average_response_time_difference_from_initial = response_time_manager.average_response_time_difference_from_initial
-
+	revenue_manager.generate_revenue(traffic_manager.served_sessions)
+	
+	statistics_panel.current_load = traffic_manager.current_load
+	statistics_panel.average_response_time = response_time_manager.average_response_time
+	
 func _on_toolbar_zoomed_in() -> void:
 	camera_controller.zoom_in()
 
@@ -137,6 +141,9 @@ func _on_toolbar_rotated_left() -> void:
 
 func _on_toolbar_rotated_right() -> void:
 	camera_controller.rotate_right()
+	
+func _on_revenue_generated(revenue) -> void:
+	finance_manager.add_funds(revenue)
 
 func _on_user_user_frustration_increased(amount: float) -> void:
 	progress_bars.user_frustration = user_frustration_manager.user_frustration

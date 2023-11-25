@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=21 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b62hm8m5in5xi" path="res://gui/tool-bar.tscn" id="12_gomch"]
 [ext_resource type="Script" path="res://scripts/managers/reponse-time-manager.gd" id="12_p36x2"]
 [ext_resource type="PackedScene" uid="uid://hyt16u7pa1xx" path="res://gui/progress-bars.tscn" id="14_uatj1"]
+[ext_resource type="Script" path="res://scripts/managers/revenue-manager.gd" id="16_oo76u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -102,31 +103,6 @@ unique_name_in_owner = true
 [node name="ProgressBars" parent="GuiLayer" instance=ExtResource("14_uatj1")]
 unique_name_in_owner = true
 
-[node name="FinanceManager" type="Node" parent="."]
-script = ExtResource("6_k0lmj")
-
-[node name="DateTimeManager" type="Node" parent="."]
-script = ExtResource("7_qrmsp")
-
-[node name="GlobalTimer" type="Timer" parent="DateTimeManager"]
-
-[node name="TrafficManager" type="Node" parent="."]
-script = ExtResource("8_ygmq4")
-
-[node name="PowerManager" type="Node" parent="."]
-script = ExtResource("9_nl1t3")
-
-[node name="UserFrustrationManager" type="Node" parent="."]
-script = ExtResource("10_rw5m7")
-
-[node name="Timer" type="Timer" parent="UserFrustrationManager"]
-
-[node name="ReponseTimeManager" type="Node" parent="."]
-script = ExtResource("12_p36x2")
-
-[node name="Timer" type="Timer" parent="ReponseTimeManager"]
-wait_time = 2.0
-
 [node name="CloudContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2, 2.08165e-12)
 
@@ -149,6 +125,43 @@ material_override = SubResource("StandardMaterial3D_fneya")
 mesh = ExtResource("2_p8csb")
 skeleton = NodePath("../..")
 
+[node name="Managers" type="Node" parent="."]
+
+[node name="FinanceManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("6_k0lmj")
+
+[node name="DateTimeManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("7_qrmsp")
+
+[node name="GlobalTimer" type="Timer" parent="Managers/DateTimeManager"]
+
+[node name="TrafficManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("8_ygmq4")
+
+[node name="PowerManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("9_nl1t3")
+
+[node name="UserFrustrationManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("10_rw5m7")
+
+[node name="Timer" type="Timer" parent="Managers/UserFrustrationManager"]
+
+[node name="ReponseTimeManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("12_p36x2")
+
+[node name="Timer" type="Timer" parent="Managers/ReponseTimeManager"]
+wait_time = 2.0
+
+[node name="RevenueManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("16_oo76u")
+
 [connection signal="max_zoom_in_reached" from="CameraController" to="." method="_on_camera_controller_max_zoom_in_reached"]
 [connection signal="max_zoom_out_reached" from="CameraController" to="." method="_on_camera_controller_max_zoom_out_reached"]
 [connection signal="zoomed_in" from="CameraController" to="." method="_on_camera_controller_zoomed_in"]
@@ -157,13 +170,14 @@ skeleton = NodePath("../..")
 [connection signal="rotated_right" from="GuiLayer/Toolbar" to="." method="_on_toolbar_rotated_right"]
 [connection signal="zoomed_in" from="GuiLayer/Toolbar" to="." method="_on_toolbar_zoomed_in"]
 [connection signal="zoomed_out" from="GuiLayer/Toolbar" to="." method="_on_toolbar_zoomed_out"]
-[connection signal="time_advanced" from="DateTimeManager" to="." method="_on_time_advanced"]
-[connection signal="timeout" from="DateTimeManager/GlobalTimer" to="DateTimeManager" method="_on_timer_timeout"]
-[connection signal="hourly_power_consumption_decreased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_decreased"]
-[connection signal="hourly_power_consumption_increased" from="PowerManager" to="." method="_on_power_manager_hourly_power_consumption_increased"]
-[connection signal="user_frustration_decreased" from="UserFrustrationManager" to="." method="_on_user_frustration_decreased"]
-[connection signal="user_frustration_increased" from="UserFrustrationManager" to="." method="_on_user_user_frustration_increased"]
-[connection signal="user_frustration_max_reached" from="UserFrustrationManager" to="." method="_on_user_frustration_max_reached"]
-[connection signal="timeout" from="UserFrustrationManager/Timer" to="UserFrustrationManager" method="_on_timer_timeout"]
-[connection signal="timeout" from="ReponseTimeManager/Timer" to="ReponseTimeManager" method="_on_timer_timeout"]
 [connection signal="computing_power_updated" from="Platform/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
+[connection signal="time_advanced" from="Managers/DateTimeManager" to="." method="_on_time_advanced"]
+[connection signal="timeout" from="Managers/DateTimeManager/GlobalTimer" to="Managers/DateTimeManager" method="_on_timer_timeout"]
+[connection signal="hourly_power_consumption_decreased" from="Managers/PowerManager" to="." method="_on_power_manager_hourly_power_consumption_decreased"]
+[connection signal="hourly_power_consumption_increased" from="Managers/PowerManager" to="." method="_on_power_manager_hourly_power_consumption_increased"]
+[connection signal="user_frustration_decreased" from="Managers/UserFrustrationManager" to="." method="_on_user_frustration_decreased"]
+[connection signal="user_frustration_increased" from="Managers/UserFrustrationManager" to="." method="_on_user_user_frustration_increased"]
+[connection signal="user_frustration_max_reached" from="Managers/UserFrustrationManager" to="." method="_on_user_frustration_max_reached"]
+[connection signal="timeout" from="Managers/UserFrustrationManager/Timer" to="Managers/UserFrustrationManager" method="_on_timer_timeout"]
+[connection signal="timeout" from="Managers/ReponseTimeManager/Timer" to="Managers/ReponseTimeManager" method="_on_timer_timeout"]
+[connection signal="revenue_generated" from="Managers/RevenueManager" to="." method="_on_revenue_generated"]

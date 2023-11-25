@@ -1,150 +1,164 @@
 [gd_scene load_steps=6 format=3 uid="uid://bmci4bg3dbcar"]
 
 [ext_resource type="Script" path="res://scripts/statistics-panel.gd" id="1_5sauv"]
+[ext_resource type="FontFile" uid="uid://cwxxvels6k7tt" path="res://assets/fonts/NotoSansMono-Regular.ttf" id="2_8oxul"]
 [ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="2_8vech"]
-[ext_resource type="Texture2D" uid="uid://chsi33fyc15ep" path="res://assets/icons/funds.svg" id="3_jqg7q"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56m0e"]
-bg_color = Color(0.501961, 0.572549, 0.913725, 0)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6tit"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(1, 1, 1, 0.152941)
+draw_center = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsm8d"]
-content_margin_left = 5.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u06yw"]
+content_margin_left = 10.0
 content_margin_top = 10.0
-content_margin_right = 5.0
+content_margin_right = 10.0
 content_margin_bottom = 10.0
-bg_color = Color(0.0431373, 0.0117647, 0.168627, 0.0980392)
+bg_color = Color(1, 1, 1, 0.372549)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8, 0.8, 0.8, 0.678431)
 border_blend = true
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-expand_margin_left = 10.0
-expand_margin_top = 5.0
-expand_margin_right = 10.0
-expand_margin_bottom = 5.0
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="statistics-panel" type="Control"]
 layout_mode = 3
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_right = 261.0
+grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_5sauv")
 
-[node name="ColorRect" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -160.0
+offset_right = 141.0
 grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_56m0e")
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m6tit")
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
-layout_mode = 2
-theme_override_constants/margin_left = 42
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 42
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer"]
-custom_minimum_size = Vector2(800, 2.08165e-12)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_constants/separation = 42
-
-[node name="PanelContainer" type="PanelContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(250, 2.08165e-12)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_fsm8d")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-tooltip_text = "Funds"
-mouse_default_cursor_shape = 16
-texture = ExtResource("3_jqg7q")
-stretch_mode = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
-[node name="CurrentFundsLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8oxul")
+theme_override_font_sizes/font_size = 32
+text = "Funds"
+
+[node name="CurrentFundsLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_8vech")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PanelContainer2" type="PanelContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(250, 2.08165e-12)
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_fsm8d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
-[node name="TextureRect2" type="TextureRect" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer2"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
-tooltip_text = "Funds"
-mouse_default_cursor_shape = 16
-texture = ExtResource("3_jqg7q")
-stretch_mode = 4
 
-[node name="TotalComputingPowerLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer2"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8oxul")
+theme_override_font_sizes/font_size = 32
+text = "Computing power"
+autowrap_mode = 2
+
+[node name="TotalComputingPowerLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_8vech")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PanelContainer3" type="PanelContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(250, 2.08165e-12)
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_fsm8d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
-[node name="TextureRect3" type="TextureRect" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer3"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer3"]
 layout_mode = 2
-size_flags_horizontal = 0
-tooltip_text = "Funds"
-mouse_default_cursor_shape = 16
-texture = ExtResource("3_jqg7q")
-stretch_mode = 4
 
-[node name="CurrentLoadLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer3"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8oxul")
+theme_override_font_sizes/font_size = 32
+text = "Load"
+
+[node name="CurrentLoadLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_8vech")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PanelContainer4" type="PanelContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(250, 2.08165e-12)
+[node name="PanelContainer5" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_fsm8d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
-[node name="TextureRect4" type="TextureRect" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer4"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer5"]
 layout_mode = 2
-tooltip_text = "Funds"
-mouse_default_cursor_shape = 16
-texture = ExtResource("3_jqg7q")
-stretch_mode = 4
 
-[node name="CurrentPowerConsumptionLabel" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/PanelContainer4"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer5/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8oxul")
+theme_override_font_sizes/font_size = 32
+text = "Response time"
+
+[node name="AverageResponseTimeLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer5/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_8vech")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer4/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8oxul")
+theme_override_font_sizes/font_size = 32
+text = "Power consumption"
+
+[node name="CurrentPowerConsumptionLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer4/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8vech")
+theme_override_font_sizes/font_size = 48
 text = "0"

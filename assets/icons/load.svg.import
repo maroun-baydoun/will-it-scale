@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chsi33fyc15ep"
-path="res://.godot/imported/funds.svg-8bc92d9f705060c1f3e26b2279f65a39.ctex"
+uid="uid://dakrprqdskgmw"
+path="res://.godot/imported/load.svg-c29ffef129393612a992e1c64a52566e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/funds.svg"
-dest_files=["res://.godot/imported/funds.svg-8bc92d9f705060c1f3e26b2279f65a39.ctex"]
+source_file="res://assets/icons/load.svg"
+dest_files=["res://.godot/imported/load.svg-c29ffef129393612a992e1c64a52566e.ctex"]
 
 [params]
 
@@ -30,7 +30,7 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=48
+process/size_limit=0
 detect_3d/compress_to=1
 svg/scale=1.0
 editor/scale_with_editor_scale=false
