@@ -1,9 +1,10 @@
+Timer
+Node
 VBoxContainer
 HBoxContainer
 Button
 Label
 PanelContainer
-Timer
 TextureProgressBar
 ProgressBar
 MarginContainer
@@ -13,7 +14,6 @@ TextureRect
 ColorRect
 Panel
 BoxContainer
-Node
 HSeparator
 Control
 TextureButton

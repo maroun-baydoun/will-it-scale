@@ -3,17 +3,19 @@ extends Node3D
 @onready var camera_controller: CameraController = $CameraController
 @onready var server_container: ServerContiner = %ServerContainer
 @onready var platform_mesh : MeshInstance3D = %PlatformMesh
-@onready var date_time_manager: DateTimeManager = $DateTimeManager 
+
 @onready var statistics_panel: StatisticsPanel = %StatisticsPanel
 @onready var toolbar: Toolbar = %Toolbar
 @onready var date_time_display: DateTimeDisplay = %DateTimeDisplay
 @onready var progress_bars: ProgressBars = %ProgressBars
+@onready var gui_layer: CanvasLayer = $GuiLayer
+
+@onready var date_time_manager: DateTimeManager = $DateTimeManager 
 @onready var finance_manager: FinanceManager = $FinanceManager
 @onready var traffic_manager := $TrafficManager
 @onready var power_manager := $PowerManager
 @onready var user_frustration_manager := $UserFrustrationManager
-@onready var gui_layer: CanvasLayer = $GuiLayer
-
+@onready var response_time_manager := $ReponseTimeManager
 
 @onready var server_scene: PackedScene = load("res://scenes/server.tscn")
 @onready var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
@@ -49,6 +51,7 @@ func _ready():
 	finance_manager.add_initial_funds(5000.0)
 	
 	date_time_manager.start()
+	response_time_manager.start()
 	user_frustration_manager.start()
 	
 	
@@ -65,6 +68,7 @@ func _display_game_over_screen() -> Signal:
 		
 func _game_over() -> void:
 	date_time_manager.stop()
+	response_time_manager.stop()
 	user_frustration_manager.stop()
 	await _display_game_over_screen()
 	Engine.time_scale = 0.0
@@ -107,7 +111,8 @@ func _on_time_advanced(hour:int, day:int) -> void:
 	
 	traffic_manager.generate_traffic(server_container.total_computing_power, date_time_manager.current_day)
 	statistics_panel.current_load = traffic_manager.current_load
-	user_frustration_manager.current_load_ratio = traffic_manager.current_load_ratio
+	response_time_manager.current_load_ratio = traffic_manager.current_load_ratio
+	user_frustration_manager.average_response_time_difference_from_initial = response_time_manager.average_response_time_difference_from_initial
 
 func _on_toolbar_zoomed_in() -> void:
 	camera_controller.zoom_in()
