@@ -26,5 +26,5 @@ var average_response_time: int:
 		
 var current_power_consumption:int:
 	set(value):
-		current_power_consumption_label.text = str(value)
+		current_power_consumption_label.text = "%skWh" % value
 		

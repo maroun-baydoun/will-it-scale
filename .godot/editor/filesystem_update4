@@ -8,3 +8,5 @@ res://scripts/statistics-panel.gd
 res://gui/progress-bars.tscn
 res://scripts/managers/finance-manager.gd
 res://scripts/managers/revenue-manager.gd
+res://scripts/managers/power-manager.gd
+res://scenes/server.tscn

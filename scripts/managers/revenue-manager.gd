@@ -3,7 +3,7 @@ class_name RevenueManager
 
 signal revenue_generated(revenue: float)
 
-const INITIAL_REVENUE_PER_SESSION: float = 0.01
+const INITIAL_REVENUE_PER_SESSION: float = 0.02
 
 var current_revenue_per_session: float = INITIAL_REVENUE_PER_SESSION
 

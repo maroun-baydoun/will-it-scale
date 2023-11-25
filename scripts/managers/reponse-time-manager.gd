@@ -22,8 +22,10 @@ var current_load_ratio := 0.0 :
 	set(ratio):
 		current_load_ratio = ratio
 		if current_load_ratio > CURRENT_LOAD_RATIO_THRESHOLD:
+			timer.wait_time = 1.0
 			average_response_time_growth_direction = AVERAGE_RESPONSE_TIME_GROWTH_DIRECTION.INCREASE
 		else :
+			timer.wait_time = 0.5
 			average_response_time_growth_direction = AVERAGE_RESPONSE_TIME_GROWTH_DIRECTION.DECREASE
 
 

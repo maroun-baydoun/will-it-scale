@@ -13,9 +13,8 @@ func add_funds(amount: float):
 	current_funds += round(amount)
 	funds_added.emit(amount)
 	
-	
 func remove_funds(amount: float):
-	current_funds -= amount
+	current_funds -= round(amount)
 	funds_removed.emit(amount)
 	
 func can_purchase(amount: float) -> bool:

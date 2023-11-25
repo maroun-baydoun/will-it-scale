@@ -15,7 +15,7 @@ const USER_FRUSTRATION_DELTA := 1.0
 var user_frustration := 0.0
 var user_frustration_growth_direction : USER_FRUSTRATION_GROWTH_DIRECTION
 
-var average_response_time_difference_from_initial :=0:
+var average_response_time_difference_from_initial := 0:
 	set(difference):
 		average_response_time_difference_from_initial = difference
 		if difference < 0:

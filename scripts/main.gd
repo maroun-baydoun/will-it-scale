@@ -114,6 +114,7 @@ func _on_time_advanced(hour:int, day:int) -> void:
 	response_time_manager.current_load_ratio = traffic_manager.current_load_ratio
 	user_frustration_manager.average_response_time_difference_from_initial = response_time_manager.average_response_time_difference_from_initial
 	revenue_manager.generate_revenue(traffic_manager.served_sessions)
+	power_manager.calculate_bill()
 	
 	statistics_panel.current_load = traffic_manager.current_load
 	statistics_panel.average_response_time = response_time_manager.average_response_time
@@ -144,6 +145,9 @@ func _on_toolbar_rotated_right() -> void:
 	
 func _on_revenue_generated(revenue) -> void:
 	finance_manager.add_funds(revenue)
+	
+func _on_power_manager_bill_calculated(amount) -> void:
+	finance_manager.remove_funds(amount)
 
 func _on_user_user_frustration_increased(amount: float) -> void:
 	progress_bars.user_frustration = user_frustration_manager.user_frustration

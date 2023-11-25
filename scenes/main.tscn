@@ -173,6 +173,7 @@ script = ExtResource("16_oo76u")
 [connection signal="computing_power_updated" from="Platform/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
 [connection signal="time_advanced" from="Managers/DateTimeManager" to="." method="_on_time_advanced"]
 [connection signal="timeout" from="Managers/DateTimeManager/GlobalTimer" to="Managers/DateTimeManager" method="_on_timer_timeout"]
+[connection signal="bill_calculated" from="Managers/PowerManager" to="." method="_on_power_manager_bill_calculated"]
 [connection signal="hourly_power_consumption_decreased" from="Managers/PowerManager" to="." method="_on_power_manager_hourly_power_consumption_decreased"]
 [connection signal="hourly_power_consumption_increased" from="Managers/PowerManager" to="." method="_on_power_manager_hourly_power_consumption_increased"]
 [connection signal="user_frustration_decreased" from="Managers/UserFrustrationManager" to="." method="_on_user_frustration_decreased"]
