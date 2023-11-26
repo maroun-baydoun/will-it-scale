@@ -10,3 +10,4 @@ res://scripts/managers/finance-manager.gd
 res://scripts/managers/revenue-manager.gd
 res://scripts/managers/power-manager.gd
 res://scenes/server.tscn
+res://scripts/managers/traffic-manager.gd

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmci4bg3dbcar"]
+[gd_scene load_steps=7 format=3 uid="uid://bmci4bg3dbcar"]
 
 [ext_resource type="Script" path="res://scripts/statistics-panel.gd" id="1_5sauv"]
 [ext_resource type="FontFile" uid="uid://cwxxvels6k7tt" path="res://assets/fonts/NotoSansMono-Regular.ttf" id="2_8oxul"]
@@ -11,6 +11,13 @@ content_margin_right = 32.0
 content_margin_bottom = 32.0
 bg_color = Color(1, 1, 1, 0.152941)
 draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxwa2"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.372549)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u06yw"]
 content_margin_left = 10.0
@@ -48,11 +55,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_m6tit")
 
+[node name="Tooltip" type="PanelContainer" parent="PanelContainer"]
+unique_name_in_owner = true
+top_level = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pxwa2")
+
+[node name="Label" type="Label" parent="PanelContainer/Tooltip"]
+layout_mode = 2
+text = "Tooltip content"
+autowrap_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" groups=["statistics-panel"]]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
@@ -74,7 +93,7 @@ theme_override_fonts/font = ExtResource("2_8vech")
 theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer" groups=["statistics-panel"]]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
@@ -97,7 +116,7 @@ theme_override_fonts/font = ExtResource("2_8vech")
 theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer" groups=["statistics-panel"]]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
@@ -119,7 +138,7 @@ theme_override_fonts/font = ExtResource("2_8vech")
 theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PanelContainer5" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer5" type="PanelContainer" parent="PanelContainer/VBoxContainer" groups=["statistics-panel"]]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
@@ -141,7 +160,7 @@ theme_override_fonts/font = ExtResource("2_8vech")
 theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer" groups=["statistics-panel"]]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u06yw")
 
