@@ -52,7 +52,6 @@ func _ready():
 	finance_manager.add_initial_funds(5000.0)
 	
 	date_time_manager.start()
-	response_time_manager.start()
 	user_frustration_manager.start()
 	
 	
@@ -69,7 +68,6 @@ func _display_game_over_screen() -> Signal:
 		
 func _game_over() -> void:
 	date_time_manager.stop()
-	response_time_manager.stop()
 	user_frustration_manager.stop()
 	await _display_game_over_screen()
 	Engine.time_scale = 0.0
@@ -113,7 +111,7 @@ func _on_time_advanced(hour:int, day:int) -> void:
 	traffic_manager.generate_traffic(server_container.total_computing_power, date_time_manager.current_day)
 	response_time_manager.current_load_ratio = traffic_manager.current_load_ratio
 	user_frustration_manager.average_response_time_difference_from_initial = response_time_manager.average_response_time_difference_from_initial
-	revenue_manager.generate_revenue(traffic_manager.served_sessions)
+	revenue_manager.generate_revenue(traffic_manager.served_sessions, traffic_manager.current_load_ratio)
 	power_manager.calculate_bill()
 	
 	statistics_panel.current_load = traffic_manager.current_load

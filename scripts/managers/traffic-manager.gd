@@ -11,8 +11,10 @@ var current_load_ratio := 0.0
 
 var initial_sessions := 1.0
 var previous_sessions := 0
+var handleable_load := 0.0
 
-func generate_traffic(handleable_load: float, day: int) -> void:
+func generate_traffic(computing_power: float, day: int) -> void:
+	handleable_load = computing_power
 	previous_sessions = current_sessions
 	current_sessions = _generate_sessions(day)
 
@@ -20,11 +22,24 @@ func generate_traffic(handleable_load: float, day: int) -> void:
 	
 	var handled_load := handleable_load if current_load > handleable_load else current_load
 	served_sessions = handled_load / session_computing_cost
-	current_load_ratio = 1.0 if handleable_load == 0 else current_load / handleable_load
-	
+	current_load_ratio = 0.0 if handleable_load == 0 else current_load / handleable_load
 	
 func _generate_sessions(day: int) -> int:
-	var delta := pow(1.01, day)
+	var day_growth := pow(1.01, day)
+	var load_factor := log(handleable_load / 75 )
 	
-	return abs(previous_sessions + round(random_number_generator.randf_range(-delta * 1.5, delta * 2) * 10.0))
+	var rand_lower_range := -day_growth * load_factor * 0.5
+	var rand_upper_range := day_growth * load_factor * 1.1
 	
+	var rand_session_growth := random_number_generator.randf_range(rand_lower_range, rand_upper_range)
+	var new_sessions = abs(previous_sessions + rand_session_growth * 10.0 )
+	
+	if current_load_ratio == 0.0:
+		return new_sessions
+	if current_load_ratio >= 1.0:
+		return new_sessions / (current_load_ratio * 1.05)
+		
+	return new_sessions + log(current_load_ratio / 2) * -1
+	
+	
+

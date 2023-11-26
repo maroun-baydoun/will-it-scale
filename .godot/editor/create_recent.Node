@@ -1,9 +1,9 @@
+Timer
 Label
 PanelContainer
 Node
 HSeparator
 VBoxContainer
-Timer
 HBoxContainer
 Button
 TextureProgressBar
