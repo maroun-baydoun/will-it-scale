@@ -1,0 +1,12 @@
+# Blender 3.6.5 MTL File: 'server.blend'
+# www.blender.org
+
+newmtl Material
+Ns 379.951630
+Ka 0.365079 0.365079 0.365079
+Kd 0.041237 0.002476 0.295688
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3

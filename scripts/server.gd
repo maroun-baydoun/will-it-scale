@@ -8,10 +8,9 @@ var computing_power: int = INITIAL_COMPUTING_POWER
 var hourly_power_consumption: int = 1 #kWh
 var price: int = 1000
 
-@onready var height: float = mesh.size.y
+@onready var height: float = mesh.get_aabb().size.y
 @onready var price_label: Label3D = $PriceLabel
 	
-
 	
 func appear(origin: Vector3):
 	transform.origin = origin
