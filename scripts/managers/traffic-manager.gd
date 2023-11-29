@@ -26,10 +26,11 @@ func generate_traffic(computing_power: float, day: int) -> void:
 	
 func _generate_sessions(day: int) -> int:
 	var day_growth := pow(1.01, day)
-	var load_factor := log(handleable_load / 75 )
+	var load_decay :=  log(handleable_load / 300)
+
 	
-	var rand_lower_range := -day_growth * load_factor * 0.5
-	var rand_upper_range := day_growth * load_factor * 1.1
+	var rand_lower_range := -day_growth * 0.5 / maxf(load_decay, 1.0)
+	var rand_upper_range := day_growth * 1.1 / maxf(load_decay, 1.0)
 	
 	var rand_session_growth := random_number_generator.randf_range(rand_lower_range, rand_upper_range)
 	var new_sessions = abs(previous_sessions + rand_session_growth * 10.0 )
@@ -38,8 +39,8 @@ func _generate_sessions(day: int) -> int:
 		return new_sessions
 	if current_load_ratio >= 1.0:
 		return new_sessions / (current_load_ratio * 1.05)
-		
-	return new_sessions + log(current_load_ratio / 2) * -1
+
+	return new_sessions
 	
 	
 
