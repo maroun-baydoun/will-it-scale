@@ -8,6 +8,7 @@ extends Node3D
 @onready var toolbar: Toolbar = %Toolbar
 @onready var date_time_display: DateTimeDisplay = %DateTimeDisplay
 @onready var progress_bars: ProgressBars = %ProgressBars
+@onready var place_first_server_control : Control = %PlaceFirstServerControl
 @onready var gui_layer: CanvasLayer = $GuiLayer
 
 @onready var date_time_manager: DateTimeManager = %DateTimeManager 
@@ -22,6 +23,7 @@ extends Node3D
 @onready var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
 @onready var game_over_scene: PackedScene = load("res://gui/game-over.tscn")
 
+var has_placed_first_server : bool = false
 
 func _ready():
 	const Y := 1.0001
@@ -34,27 +36,29 @@ func _ready():
 		
 
 	var index: int = 0
+	var grid_cells: Array[GridCell] = []
 	
 	for origin in origins:
-		var grid_cell: Node3D = grid_cell_scene.instantiate()
+		var grid_cell: GridCell = grid_cell_scene.instantiate()
 		grid_cell.transform.origin = origin
 		grid_cell.index = index
 		
 		grid_cell.clicked.connect(_on_grid_cell_clicked)
 		
 		platform_mesh.add_child(grid_cell)
+		grid_cells.append(grid_cell)
 		
 		index+=1
 		
 	await get_tree().create_timer(1).timeout
 	await camera_controller.enter()
-		
-	finance_manager.funds_added.connect(_on_funds_added)
-	finance_manager.funds_removed.connect(_on_funds_removed)
-	finance_manager.add_initial_funds(5000.0)
 	
-	date_time_manager.start()
-	user_frustration_manager.start()
+	for grid_cell in grid_cells:
+		grid_cell.can_receive_input = true
+	
+	get_tree().create_tween().tween_property(place_first_server_control, "modulate:a", 1, 0.5)
+	
+	finance_manager.add_initial_funds(5000.0)
 	
 	
 func _play_again() -> void:
@@ -74,6 +78,20 @@ func _game_over() -> void:
 	await _display_game_over_screen()
 	Engine.time_scale = 0.0
 	
+	
+func _display_hud() -> void:
+	var hud_nodes = get_tree().get_nodes_in_group("hud")
+	
+	for hude_node in hud_nodes:
+		hude_node.visible = true
+		
+func _start_game() -> void:
+	place_first_server_control.queue_free()
+	
+	_display_hud()
+	date_time_manager.start()
+	user_frustration_manager.start()
+	
 func _on_funds_added(amount):
 	statistics_panel.current_funds = finance_manager.current_funds
 	
@@ -81,6 +99,10 @@ func _on_funds_removed(amount):
 	statistics_panel.current_funds = finance_manager.current_funds
 
 func _on_grid_cell_clicked(cell: GridCell):
+	if not has_placed_first_server:
+		has_placed_first_server = true
+		_start_game()
+
 	var server: Server = server_scene.instantiate()
 	
 	if not finance_manager.can_purchase(server.price):

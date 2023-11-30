@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=23 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
 [ext_resource type="ArrayMesh" uid="uid://diup5w1a033pu" path="res://assets/models/platform.obj" id="2_p8csb"]
+[ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="3_hfa2q"]
 [ext_resource type="Script" path="res://scripts/camera-controller.gd" id="3_i8ue0"]
 [ext_resource type="PackedScene" uid="uid://bmci4bg3dbcar" path="res://gui/statistics-panel.tscn" id="3_ph4uk"]
 [ext_resource type="PackedScene" uid="uid://burvuv1q1oe1t" path="res://gui/date-time-display.tscn" id="6_bcuad"]
@@ -42,6 +43,23 @@ volumetric_fog_albedo = Color(0.054902, 0.301961, 0.47451, 1)
 volumetric_fog_emission = Color(0.341176, 0.529412, 1, 1)
 volumetric_fog_length = 30.0
 adjustment_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ncb7"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.313726, 0.313726, 0.313726, 0.431373)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.8, 0.8, 0.541176)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fneya"]
 albedo_color = Color(0.823529, 0.541176, 0, 1)
@@ -84,17 +102,49 @@ omni_range = 13.6197
 
 [node name="GuiLayer" type="CanvasLayer" parent="."]
 
-[node name="StatisticsPanel" parent="GuiLayer" instance=ExtResource("3_ph4uk")]
+[node name="StatisticsPanel" parent="GuiLayer" groups=["hud"] instance=ExtResource("3_ph4uk")]
 unique_name_in_owner = true
+visible = false
 
-[node name="DateTimeDisplay" parent="GuiLayer" instance=ExtResource("6_bcuad")]
+[node name="DateTimeDisplay" parent="GuiLayer" groups=["hud"] instance=ExtResource("6_bcuad")]
 unique_name_in_owner = true
+visible = false
 
-[node name="Toolbar" parent="GuiLayer" instance=ExtResource("12_gomch")]
+[node name="Toolbar" parent="GuiLayer" groups=["hud"] instance=ExtResource("12_gomch")]
 unique_name_in_owner = true
+visible = false
 
-[node name="ProgressBars" parent="GuiLayer" instance=ExtResource("14_uatj1")]
+[node name="ProgressBars" parent="GuiLayer" groups=["hud"] instance=ExtResource("14_uatj1")]
 unique_name_in_owner = true
+visible = false
+
+[node name="PlaceFirstServerControl" type="CenterContainer" parent="GuiLayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -272.0
+offset_right = 945.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="GuiLayer/PlaceFirstServerControl"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="PanelContainer" type="PanelContainer" parent="GuiLayer/PlaceFirstServerControl/MarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ncb7")
+
+[node name="Label" type="Label" parent="GuiLayer/PlaceFirstServerControl/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_hfa2q")
+theme_override_font_sizes/font_size = 32
+text = "Place the first server on the grid to start"
 
 [node name="CloudContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2, 2.08165e-12)
@@ -161,6 +211,8 @@ script = ExtResource("16_oo76u")
 [connection signal="zoomed_in" from="GuiLayer/Toolbar" to="." method="_on_toolbar_zoomed_in"]
 [connection signal="zoomed_out" from="GuiLayer/Toolbar" to="." method="_on_toolbar_zoomed_out"]
 [connection signal="computing_power_updated" from="Platform/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
+[connection signal="funds_added" from="Managers/FinanceManager" to="." method="_on_funds_added"]
+[connection signal="funds_removed" from="Managers/FinanceManager" to="." method="_on_funds_removed"]
 [connection signal="time_advanced" from="Managers/DateTimeManager" to="." method="_on_time_advanced"]
 [connection signal="timeout" from="Managers/DateTimeManager/GlobalTimer" to="Managers/DateTimeManager" method="_on_timer_timeout"]
 [connection signal="bill_calculated" from="Managers/PowerManager" to="." method="_on_power_manager_bill_calculated"]
