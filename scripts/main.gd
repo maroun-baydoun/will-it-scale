@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var camera_controller: CameraController = $CameraController
+@onready var platform: Node3D = %Platform
 @onready var server_container: ServerContiner = %ServerContainer
 @onready var platform_mesh : MeshInstance3D = %PlatformMesh
 
@@ -25,6 +26,7 @@ extends Node3D
 @onready var word_environment_initial_r: float = word_environment.environment.volumetric_fog_albedo.r
 
 var has_placed_first_server : bool = false
+var grid_cells: Array[GridCell] = []
 
 func _ready():
 	const Y := 1.0001
@@ -37,7 +39,6 @@ func _ready():
 		
 
 	var index: int = 0
-	var grid_cells: Array[GridCell] = []
 	
 	var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
 	
@@ -79,20 +80,28 @@ func _display_game_over_screen() -> Signal:
 func _game_over() -> void:
 	date_time_manager.stop()
 	user_frustration_manager.stop()
+	_set_hud_visibility(false)
+	await camera_controller.enter()
+	await get_tree().create_timer(0.5).timeout
+	var tween = get_tree().create_tween()
+	tween.tween_property(platform, "transform:origin:y", -10, 2).set_trans(Tween.TRANS_SINE)
+	tween.tween_callback(platform.queue_free)
+	await tween.finished
 	await _display_game_over_screen()
+	word_environment.environment.volumetric_fog_albedo.r = word_environment_initial_r
 	Engine.time_scale = 0.0
 	
 	
-func _display_hud() -> void:
+func _set_hud_visibility(visible: bool) -> void:
 	var hud_nodes = get_tree().get_nodes_in_group("hud")
 	
 	for hude_node in hud_nodes:
-		hude_node.visible = true
+		hude_node.visible = visible
 		
 func _start_game() -> void:
 	place_first_server_control.queue_free()
 	
-	_display_hud()
+	_set_hud_visibility(true)
 	date_time_manager.start()
 	user_frustration_manager.start()
 	
