@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://44ttyactn16f"]
+
+[ext_resource type="FontFile" uid="uid://bq78y68oopj5i" path="res://assets/fonts/NotoSansMono-Black.ttf" id="1_q5qxu"]
+[ext_resource type="Script" path="res://scripts/title-screen.gd" id="1_tnf8e"]
+[ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="2_jud00"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_tnf8e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TitleScreen" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.988235, 0.976471, 0.992157, 0.713726)
+
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.73
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TitleScreen/CenterContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/TitleScreen/CenterContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_q5qxu")
+theme_override_font_sizes/font_size = 164
+text = "Will it scale?"
+
+[node name="StartButton" type="Button" parent="CanvasLayer/TitleScreen/CenterContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.415686, 0.627451, 1)
+theme_override_colors/font_hover_color = Color(0, 0.415686, 0.627451, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_jud00")
+theme_override_font_sizes/font_size = 72
+text = "Start"
+flat = true
+
+[connection signal="pressed" from="CanvasLayer/TitleScreen/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

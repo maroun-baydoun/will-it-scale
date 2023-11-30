@@ -8,6 +8,7 @@ signal max_zoom_in_reached
 
 const MAX_CAMERA_SIZE: int = 10
 const MIN_CAMERA_SIZE: int = 2
+const DEFAULT_CAMERA_SIZE : int = 6
 
 @onready var camera = $Camera3D
 
@@ -45,6 +46,11 @@ func rotate_left() -> void:
 func rotate_right() -> void:
 	get_tree().create_tween().tween_property(self, "rotation_degrees:y", rotation_degrees.y + 45, 0.2)
 	
+func enter() -> Signal :
+	var tween := get_tree().create_tween()
+	tween.tween_property(camera, "size", DEFAULT_CAMERA_SIZE, 1)
+	
+	return tween.finished
 
 func _unhandled_input(event):
 	if event.is_action_pressed("zoom_in"):

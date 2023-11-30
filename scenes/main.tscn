@@ -70,7 +70,7 @@ transform = Transform3D(-0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.
 projection = 1
 current = true
 fov = 67.8
-size = 6.0
+size = 20.0
 far = 30.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

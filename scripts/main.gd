@@ -46,6 +46,8 @@ func _ready():
 		
 		index+=1
 		
+	await get_tree().create_timer(1).timeout
+	await camera_controller.enter()
 		
 	finance_manager.funds_added.connect(_on_funds_added)
 	finance_manager.funds_removed.connect(_on_funds_removed)
