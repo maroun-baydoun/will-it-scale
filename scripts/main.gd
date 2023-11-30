@@ -20,8 +20,6 @@ extends Node3D
 @onready var response_time_manager := %ReponseTimeManager
 
 @onready var server_scene: PackedScene = load("res://scenes/server.tscn")
-@onready var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
-@onready var game_over_scene: PackedScene = load("res://gui/game-over.tscn")
 
 var has_placed_first_server : bool = false
 
@@ -37,6 +35,8 @@ func _ready():
 
 	var index: int = 0
 	var grid_cells: Array[GridCell] = []
+	
+	var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
 	
 	for origin in origins:
 		var grid_cell: GridCell = grid_cell_scene.instantiate()
@@ -66,6 +66,7 @@ func _play_again() -> void:
 	Engine.time_scale = 1.0
 	
 func _display_game_over_screen() -> Signal:
+	var game_over_scene: PackedScene = load("res://gui/game-over.tscn")
 	var game_over_instance := game_over_scene.instantiate()
 	game_over_instance.modulate.a = 0
 	gui_layer.add_child(game_over_instance)
