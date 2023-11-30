@@ -21,6 +21,9 @@ extends Node3D
 
 @onready var server_scene: PackedScene = load("res://scenes/server.tscn")
 
+@onready var word_environment: WorldEnvironment = $WorldEnvironment
+@onready var word_environment_initial_r: float = word_environment.environment.volumetric_fog_albedo.r
+
 var has_placed_first_server : bool = false
 
 func _ready():
@@ -50,7 +53,7 @@ func _ready():
 		
 		index+=1
 		
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	await camera_controller.enter()
 	
 	for grid_cell in grid_cells:
@@ -173,9 +176,19 @@ func _on_power_manager_bill_calculated(amount) -> void:
 	finance_manager.remove_funds(amount)
 
 func _on_user_user_frustration_increased(amount: float) -> void:
+	if user_frustration_manager.user_frustration > user_frustration_manager.MAX_USER_FRUSTRATION / 2.0:
+		word_environment.environment.volumetric_fog_albedo.r = min(1.0, word_environment.environment.volumetric_fog_albedo.r + 0.1)
+	else:
+		word_environment.environment.volumetric_fog_albedo.r = word_environment_initial_r
+
 	progress_bars.user_frustration = user_frustration_manager.user_frustration
 
 func _on_user_frustration_decreased(amount: float) -> void:
+	if user_frustration_manager.user_frustration > user_frustration_manager.MAX_USER_FRUSTRATION / 2.0:
+		word_environment.environment.volumetric_fog_albedo.r = max(word_environment_initial_r, word_environment.environment.volumetric_fog_albedo.r - 0.05)
+	else:
+		word_environment.environment.volumetric_fog_albedo.r = word_environment_initial_r
+
 	progress_bars.user_frustration = user_frustration_manager.user_frustration
 
 func _on_user_frustration_max_reached() -> void:

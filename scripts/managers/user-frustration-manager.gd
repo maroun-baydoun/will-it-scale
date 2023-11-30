@@ -35,11 +35,13 @@ func stop() -> void:
 
 func increase(amount: float) -> void:
 	user_frustration += amount
+	user_frustration = min(user_frustration, MAX_USER_FRUSTRATION)
 	user_frustration_increased.emit(amount)
 
 
 func decrease(amount: float) -> void:
 	user_frustration -= amount
+	user_frustration = max(user_frustration, 0.0)
 	user_frustration_decreased.emit(amount)
 
 
@@ -49,7 +51,7 @@ func _on_timer_timeout() -> void:
 	if user_frustration_growth_direction == USER_FRUSTRATION_GROWTH_DIRECTION.INCREASE and user_frustration < MAX_USER_FRUSTRATION:
 		increase(USER_FRUSTRATION_DELTA + weighted_delta)
 		
-	if user_frustration_growth_direction == USER_FRUSTRATION_GROWTH_DIRECTION.DECREASE and user_frustration >= USER_FRUSTRATION_DELTA - weighted_delta:
+	if user_frustration_growth_direction == USER_FRUSTRATION_GROWTH_DIRECTION.DECREASE and user_frustration > 0:
 		decrease(USER_FRUSTRATION_DELTA - weighted_delta)
 		
 	if user_frustration >= MAX_USER_FRUSTRATION:

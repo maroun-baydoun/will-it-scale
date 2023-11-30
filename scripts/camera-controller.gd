@@ -47,7 +47,7 @@ func rotate_right() -> void:
 	get_tree().create_tween().tween_property(self, "rotation_degrees:y", rotation_degrees.y + 45, 0.2)
 	
 func enter() -> Signal :
-	var tween := get_tree().create_tween()
+	var tween := get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(camera, "size", DEFAULT_CAMERA_SIZE, 1)
 	
 	return tween.finished
