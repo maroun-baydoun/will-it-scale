@@ -217,3 +217,12 @@ func _on_user_frustration_decreased(amount: float) -> void:
 
 func _on_user_frustration_max_reached() -> void:
 	_game_over()
+
+
+func _on_paused() -> void:
+	theme_music_player.stream_paused = true
+
+
+func _on_resumed() -> void:
+	if theme_music_player.stream_paused:
+		theme_music_player.stream_paused = false

@@ -1,6 +1,9 @@
 extends Control
 class_name DateTimeDisplay
 
+signal paused
+signal resumed
+
 @onready var day_label: Label = %DayLabel
 @onready var hour_label: Label = %HourLabel
 @onready var pause_button: Button = %PauseButton
@@ -41,6 +44,8 @@ func _on_pause_button_pressed() -> void:
 	fast_forward_button.disabled = false
 	pause_button.disabled = true
 	
+	paused.emit()
+	
 
 func _on_play_button_pressed() -> void:
 	get_tree().paused = false
@@ -49,6 +54,8 @@ func _on_play_button_pressed() -> void:
 	play_button.disabled = true
 	pause_button.disabled = false
 	fast_forward_button.disabled = false
+	
+	resumed.emit()
 
 
 func _on_fast_forward_button_pressed() -> void:
