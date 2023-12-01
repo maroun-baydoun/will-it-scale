@@ -74,6 +74,8 @@ func _display_game_over_screen() -> Signal:
 	var game_over_instance := game_over_scene.instantiate()
 	game_over_instance.modulate.a = 0
 	gui_layer.add_child(game_over_instance)
+	game_over_instance.served_days = date_time_manager.current_day
+	game_over_instance.served_sessions = traffic_manager.total_sessions
 	game_over_instance.play_again_pressed.connect(func(): _play_again())
 	return get_tree().create_tween().tween_property(game_over_instance, "modulate:a", 1.0, 2).finished
 		
