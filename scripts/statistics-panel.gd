@@ -9,6 +9,15 @@ class_name StatisticsPanel
 
 @onready var panels = get_tree().get_nodes_in_group("statistics-panel")
 @onready var tooltip: PanelContainer = %Tooltip
+@onready var tooltip_label: Label = %TooltipLabel
+
+const TOOLTIP_CONTENT: Dictionary = {
+	"funds": "Funds allow you to purchase new servers. Every session generates a small amount of revenue. The lower the server load, the more revenue is generated.",
+	"computing-power": "The computing power is the total load that the servers can currently handle. Purchasing servers increases this value.",
+	"load": "The load increases as more users try to access the website. Once the load reaches 95% of the current computing power, the response time starts to increase. Purchasing more servers lowers the load temporarily until more users try to access the website.",
+	"response-time": "A response time higher than 300 ms degrades the user experience and raises their frustration. Lowering the load decreases this value.",
+	"power-consumption": "Every server consumes power. The higher the power consumption, the more funds are used to pay the daily power bill."
+}
 
 var current_funds: float:
 	set(value):
@@ -38,9 +47,11 @@ func _ready():
 		panel.mouse_exited.connect(_on_panel_container_mouse_exited)
 
 func _on_panel_container_mouse_entered(panel: PanelContainer) -> void:
+	var statistic: String = panel.get_meta("statistic")
+	tooltip_label.text = TOOLTIP_CONTENT[statistic]
 	tooltip.position.x = panel.global_position.x + panel.size.x + 16
-	tooltip.position.y = panel.global_position.y + panel.size.y / 2 - tooltip.size.y / 2
-	# tooltip.visible = true
+	tooltip.position.y = panel.global_position.y
+	tooltip.visible = true
 
 
 func _on_panel_container_mouse_exited() -> void:
