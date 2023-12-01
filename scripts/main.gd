@@ -25,6 +25,8 @@ extends Node3D
 @onready var word_environment: WorldEnvironment = $WorldEnvironment
 @onready var word_environment_initial_r: float = word_environment.environment.volumetric_fog_albedo.r
 
+@onready var theme_music_player: AudioStreamPlayer = %ThemeMusicPlayer
+
 var has_placed_first_server : bool = false
 var grid_cells: Array[GridCell] = []
 
@@ -84,6 +86,7 @@ func _game_over() -> void:
 	user_frustration_manager.stop()
 	_set_hud_visibility(false)
 	await camera_controller.enter()
+	_fade_theme_music_out()
 	await get_tree().create_timer(0.5).timeout
 	var tween = get_tree().create_tween()
 	tween.tween_property(platform, "transform:origin:y", -10, 2).set_trans(Tween.TRANS_SINE)
@@ -100,12 +103,22 @@ func _set_hud_visibility(visible: bool) -> void:
 	for hude_node in hud_nodes:
 		hude_node.visible = visible
 		
+func _fade_theme_music_in() -> void:
+	theme_music_player.volume_db = -20
+	theme_music_player.play()
+	get_tree().create_tween().tween_property(theme_music_player, "volume_db", -5, 4)
+	
+func _fade_theme_music_out() -> void:
+	await get_tree().create_tween().tween_property(theme_music_player, "volume_db", -20, 4).finished
+	theme_music_player.stop()
+		
 func _start_game() -> void:
 	place_first_server_control.queue_free()
 	
 	_set_hud_visibility(true)
 	date_time_manager.start()
 	user_frustration_manager.start()
+	_fade_theme_music_in()
 	
 func _on_funds_added(amount):
 	statistics_panel.current_funds = finance_manager.current_funds

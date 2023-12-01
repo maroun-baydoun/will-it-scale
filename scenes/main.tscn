@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=24 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
 [ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/managers/reponse-time-manager.gd" id="12_p36x2"]
 [ext_resource type="PackedScene" uid="uid://hyt16u7pa1xx" path="res://gui/progress-bars.tscn" id="14_uatj1"]
 [ext_resource type="Script" path="res://scripts/managers/revenue-manager.gd" id="16_oo76u"]
+[ext_resource type="AudioStream" uid="uid://8le0jlvl10jd" path="res://assets/sounds/theme.mp3" id="18_6q0oh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46v2u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -202,6 +203,11 @@ script = ExtResource("12_p36x2")
 [node name="RevenueManager" type="Node" parent="Managers"]
 unique_name_in_owner = true
 script = ExtResource("16_oo76u")
+
+[node name="ThemeMusicPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("18_6q0oh")
+volume_db = -5.0
 
 [connection signal="max_zoom_in_reached" from="CameraController" to="." method="_on_camera_controller_max_zoom_in_reached"]
 [connection signal="max_zoom_out_reached" from="CameraController" to="." method="_on_camera_controller_max_zoom_out_reached"]
