@@ -1,8 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://44ttyactn16f"]
+[gd_scene load_steps=7 format=3 uid="uid://44ttyactn16f"]
 
 [ext_resource type="FontFile" uid="uid://bq78y68oopj5i" path="res://assets/fonts/NotoSansMono-Black.ttf" id="1_q5qxu"]
 [ext_resource type="Script" path="res://scripts/title-screen.gd" id="1_tnf8e"]
+[ext_resource type="Texture2D" uid="uid://bfjcoosfop2g7" path="res://assets/textures/splash.png" id="2_hcly1"]
 [ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="2_jud00"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84125"]
+content_margin_left = 128.0
+content_margin_top = 16.0
+content_margin_right = 128.0
+content_margin_bottom = 16.0
+bg_color = Color(0.278431, 0.14902, 0.341176, 0.886275)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.278431, 0.14902, 0.341176, 0.372549)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx56p"]
+content_margin_left = 128.0
+content_margin_top = 16.0
+content_margin_right = 128.0
+content_margin_bottom = 16.0
+bg_color = Color(0.160784, 0.0784314, 0.2, 0.886275)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.278431, 0.14902, 0.341176, 0.372549)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Node" type="Node"]
 script = ExtResource("1_tnf8e")
@@ -18,6 +51,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hcly1")
+stretch_mode = 6
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/TitleScreen"]
 layout_mode = 1
 anchors_preset = 15
@@ -25,40 +68,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.988235, 0.976471, 0.992157, 0.713726)
+color = Color(0.803922, 0.745098, 0.258824, 0.290196)
 
-[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/TitleScreen"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TitleScreen"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 1808.0
+offset_bottom = 695.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.73
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 256
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TitleScreen/CenterContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TitleScreen/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 64
+theme_override_constants/separation = 128
 
-[node name="TitleLabel" type="Label" parent="CanvasLayer/TitleScreen/CenterContainer2/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="CanvasLayer/TitleScreen/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 0.913725, 0.866667, 1)
+theme_override_colors/font_outline_color = Color(0.741176, 0.227451, 0.0470588, 0.152941)
+theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("1_q5qxu")
-theme_override_font_sizes/font_size = 164
+theme_override_font_sizes/font_size = 200
 text = "Will it scale?"
+horizontal_alignment = 1
+uppercase = true
 
-[node name="StartButton" type="Button" parent="CanvasLayer/TitleScreen/CenterContainer2/VBoxContainer"]
+[node name="StartButton" type="Button" parent="CanvasLayer/TitleScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0.415686, 0.627451, 1)
-theme_override_colors/font_hover_color = Color(0, 0.415686, 0.627451, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.901961)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_jud00")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 92
+theme_override_styles/normal = SubResource("StyleBoxFlat_84125")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qx56p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qx56p")
 text = "Start"
-flat = true
 
-[connection signal="pressed" from="CanvasLayer/TitleScreen/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TitleScreen/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
