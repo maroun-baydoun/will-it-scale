@@ -1,9 +1,8 @@
 extends Node3D
 
 @onready var camera_controller: CameraController = $CameraController
-@onready var platform: Node3D = %Platform
-@onready var server_container: ServerContiner = %ServerContainer
-@onready var platform_mesh : MeshInstance3D = %PlatformMesh
+@onready var platform: Platform = %Platform
+
 
 @onready var statistics_panel: StatisticsPanel = %StatisticsPanel
 @onready var toolbar: Toolbar = %Toolbar
@@ -12,6 +11,7 @@ extends Node3D
 @onready var place_first_server_control : Control = %PlaceFirstServerControl
 @onready var gui_layer: CanvasLayer = $GuiLayer
 
+@onready var server_manager: ServerManager = %ServerManager
 @onready var date_time_manager: DateTimeManager = %DateTimeManager 
 @onready var finance_manager: FinanceManager = %FinanceManager
 @onready var revenue_manager: RevenueManager = %RevenueManager
@@ -31,36 +31,10 @@ var has_placed_first_server : bool = false
 var grid_cells: Array[GridCell] = []
 
 func _ready():
-	const Y := 1.0001
-	
-	var origins = []
-	
-	for i in range(-2, 3):
-		for j in range(-2, 3):
-			origins.append(Vector3(0.65 * i, Y ,0.65 * j))
-		
-
-	var index: int = 0
-	
-	var grid_cell_scene: PackedScene = load("res://scenes/grid-cell.tscn")
-	
-	for origin in origins:
-		var grid_cell: GridCell = grid_cell_scene.instantiate()
-		grid_cell.transform.origin = origin
-		grid_cell.index = index
-		
-		grid_cell.clicked.connect(_on_grid_cell_clicked)
-		
-		platform_mesh.add_child(grid_cell)
-		grid_cells.append(grid_cell)
-		
-		index+=1
-		
 	await get_tree().create_timer(0.5).timeout
 	await camera_controller.enter()
 	
-	for grid_cell in grid_cells:
-		grid_cell.can_receive_input = true
+	platform.set_grid_cells_can_receive_input(true)
 	
 	get_tree().create_tween().tween_property(place_first_server_control, "modulate:a", 1, 0.5)
 	
@@ -138,13 +112,14 @@ func _on_grid_cell_clicked(cell: GridCell):
 		return
 	
 	cell.occupy()
-	server_container.add_server(server)
+	platform.add_server(server)
 	server.appear(cell.transform.origin)
 	
+	server_manager.add_server(server)
 	finance_manager.remove_funds(server.price)
 	power_manager.increase_hourly_power_consumption(server.hourly_power_consumption)
 	
-func _on_server_container_computing_power_updated(computing_power) -> void:
+func _on_computing_power_updated(computing_power: int) -> void:
 	statistics_panel.total_computing_power = computing_power
 
 
@@ -160,7 +135,7 @@ func _on_time_advanced(hour:int, day:int) -> void:
 	date_time_display.current_hour = hour
 	date_time_display.current_day = day
 	
-	traffic_manager.generate_traffic(server_container.total_computing_power, date_time_manager.current_day)
+	traffic_manager.generate_traffic(server_manager.total_computing_power, date_time_manager.current_day)
 	response_time_manager.current_load_ratio = traffic_manager.current_load_ratio
 	user_frustration_manager.average_response_time_difference_from_initial = response_time_manager.average_response_time_difference_from_initial
 	revenue_manager.generate_revenue(traffic_manager.served_sessions, traffic_manager.current_load_ratio)

@@ -1,8 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://bmrweoufl1pbi"]
+[gd_scene load_steps=23 format=3 uid="uid://bmrweoufl1pbi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nvayq"]
-[ext_resource type="PackedScene" uid="uid://cqi6wbtu3vlap" path="res://scenes/server-container.tscn" id="2_n07kn"]
-[ext_resource type="ArrayMesh" uid="uid://diup5w1a033pu" path="res://assets/models/platform.obj" id="2_p8csb"]
 [ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="3_hfa2q"]
 [ext_resource type="Script" path="res://scripts/camera-controller.gd" id="3_i8ue0"]
 [ext_resource type="PackedScene" uid="uid://bmci4bg3dbcar" path="res://gui/statistics-panel.tscn" id="3_ph4uk"]
@@ -10,7 +8,9 @@
 [ext_resource type="Script" path="res://scripts/managers/finance-manager.gd" id="6_k0lmj"]
 [ext_resource type="Script" path="res://scripts/managers/date-time-manager.gd" id="7_qrmsp"]
 [ext_resource type="Script" path="res://scripts/managers/traffic-manager.gd" id="8_ygmq4"]
+[ext_resource type="PackedScene" uid="uid://b44nql4n3hbqu" path="res://scenes/platform.tscn" id="9_6mebd"]
 [ext_resource type="Script" path="res://scripts/managers/power-manager.gd" id="9_nl1t3"]
+[ext_resource type="Script" path="res://scripts/managers/server-manager.gd" id="10_juo2r"]
 [ext_resource type="Script" path="res://scripts/managers/user-frustration-manager.gd" id="10_rw5m7"]
 [ext_resource type="PackedScene" uid="uid://c137nllk5qnqt" path="res://scenes/cloud.tscn" id="10_s42rh"]
 [ext_resource type="PackedScene" uid="uid://b62hm8m5in5xi" path="res://gui/tool-bar.tscn" id="12_gomch"]
@@ -61,9 +61,6 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fneya"]
-albedo_color = Color(0.823529, 0.541176, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_nvayq")
@@ -157,20 +154,14 @@ transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -5.7262, 0, 8.67328)
 move_direction = -1
 
-[node name="Platform" type="Node3D" parent="."]
+[node name="Platform" parent="." instance=ExtResource("9_6mebd")]
 unique_name_in_owner = true
-
-[node name="ServerContainer" parent="Platform" instance=ExtResource("2_n07kn")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
-
-[node name="PlatformMesh" type="MeshInstance3D" parent="Platform"]
-unique_name_in_owner = true
-material_override = SubResource("StandardMaterial3D_fneya")
-mesh = ExtResource("2_p8csb")
-skeleton = NodePath("../..")
 
 [node name="Managers" type="Node" parent="."]
+
+[node name="ServerManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("10_juo2r")
 
 [node name="FinanceManager" type="Node" parent="Managers"]
 unique_name_in_owner = true
@@ -219,7 +210,8 @@ volume_db = -5.0
 [connection signal="rotated_right" from="GuiLayer/Toolbar" to="." method="_on_toolbar_rotated_right"]
 [connection signal="zoomed_in" from="GuiLayer/Toolbar" to="." method="_on_toolbar_zoomed_in"]
 [connection signal="zoomed_out" from="GuiLayer/Toolbar" to="." method="_on_toolbar_zoomed_out"]
-[connection signal="computing_power_updated" from="Platform/ServerContainer" to="." method="_on_server_container_computing_power_updated"]
+[connection signal="on_grid_cell_clicked" from="Platform" to="." method="_on_grid_cell_clicked"]
+[connection signal="computing_power_updated" from="Managers/ServerManager" to="." method="_on_computing_power_updated"]
 [connection signal="funds_added" from="Managers/FinanceManager" to="." method="_on_funds_added"]
 [connection signal="funds_removed" from="Managers/FinanceManager" to="." method="_on_funds_removed"]
 [connection signal="time_advanced" from="Managers/DateTimeManager" to="." method="_on_time_advanced"]

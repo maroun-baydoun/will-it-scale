@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b44nql4n3hbqu"]
+
+[ext_resource type="Script" path="res://scripts/platform.gd" id="1_5puu2"]
+[ext_resource type="ArrayMesh" uid="uid://diup5w1a033pu" path="res://assets/models/platform.obj" id="2_7bmfx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fneya"]
+albedo_color = Color(0.823529, 0.541176, 0, 1)
+
+[node name="Platform" type="Node3D"]
+script = ExtResource("1_5puu2")
+
+[node name="ServerContainer" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
+
+[node name="PlatformMesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_fneya")
+mesh = ExtResource("2_7bmfx")
+skeleton = NodePath("../..")

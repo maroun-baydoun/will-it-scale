@@ -1,7 +1,7 @@
 extends MeshInstance3D
 class_name GridCell
 
-var index: int;
+
 var is_empty: bool = true;
 
 signal clicked(origin);

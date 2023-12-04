@@ -1,6 +1,21 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqi6wbtu3vlap"]
 
-[ext_resource type="Script" path="res://scripts/server-container.gd" id="1_is5c0"]
+[sub_resource type="GDScript" id="GDScript_lva3t"]
+script/source = "extends Node
+class_name ServerContainer
+
+signal computing_power_updated(computing_power:int)
+
+@onready var total_computing_power:int:
+	set(computing_power):
+		total_computing_power = computing_power
+		computing_power_updated.emit(total_computing_power)
+
+
+func add_server(server: Server):
+	total_computing_power += server.computing_power
+	add_child(server)
+"
 
 [node name="server_container" type="Node3D"]
-script = ExtResource("1_is5c0")
+script = SubResource("GDScript_lva3t")
