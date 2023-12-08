@@ -17,3 +17,7 @@ Button/colors/icon_normal_color = Color(1, 1, 1, 0.635294)
 Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
 ProgressBar/styles/background = SubResource("StyleBoxFlat_sn44w")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_oyhd4")
+TimelineButton/base_type = &"Button"
+TimelineButton/colors/icon_disabled_color = Color(1, 1, 1, 1)
+TimelineButton/colors/icon_focus_color = Color(1, 1, 1, 1)
+TimelineButton/colors/icon_hover_color = Color(1, 1, 1, 1)
