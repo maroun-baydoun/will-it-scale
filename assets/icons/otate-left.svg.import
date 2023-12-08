@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blc68hukoq7jt"
-path="res://.godot/imported/play.svg-e9236ccb724ef92a26e89cd871a33e4f.ctex"
+uid="uid://7525h05mkewt"
+path="res://.godot/imported/otate-left.svg-2149262ef07f6e22b7b54cfdae9b14bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/play.svg"
-dest_files=["res://.godot/imported/play.svg-e9236ccb724ef92a26e89cd871a33e4f.ctex"]
+source_file="res://assets/icons/otate-left.svg"
+dest_files=["res://.godot/imported/otate-left.svg-2149262ef07f6e22b7b54cfdae9b14bd.ctex"]
 
 [params]
 
@@ -30,7 +30,7 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=42
+process/size_limit=0
 detect_3d/compress_to=1
 svg/scale=1.0
 editor/scale_with_editor_scale=false

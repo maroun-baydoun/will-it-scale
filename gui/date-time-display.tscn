@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cwxxvels6k7tt" path="res://assets/fonts/NotoSansMono-Regular.ttf" id="2_i6f01"]
 [ext_resource type="Texture2D" uid="uid://dqbygo20rnmob" path="res://assets/icons/pause.svg" id="3_3u462"]
 [ext_resource type="Theme" uid="uid://b6h58sqqjjw4q" path="res://theme.tres" id="3_q2v6x"]
-[ext_resource type="Texture2D" uid="uid://c6hxut05mhsr0" path="res://assets/icons/play.svg" id="5_0qy1b"]
+[ext_resource type="Texture2D" uid="uid://blc68hukoq7jt" path="res://assets/icons/play.svg" id="5_0qy1b"]
 [ext_resource type="Texture2D" uid="uid://cbtts74lycygo" path="res://assets/icons/fast-forward.svg" id="5_iall4"]
 
 [node name="date-time-display" type="Control"]

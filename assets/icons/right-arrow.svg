@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-    <path d="m 4.996094 14 l 6.003906 -6 l -6.003906 -6 z m 0 0" fill="#ffffff"/>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="100" height="100" rx="20" transform="matrix(-1 0 0 1 114 14)" fill="white"/>
+<path d="M48.6069 99C50.1647 99 51.6849 98.5217 52.9621 97.6298L90.8136 71.1975C96.6344 67.1327 96.4839 58.4661 90.5254 54.606L52.915 30.2406C51.6651 29.4308 50.2076 29 48.7184 29V29C44.4557 29 41 32.4556 41 36.7184L41 91.3931C41 95.5943 44.4057 99 48.6069 99V99Z" fill="black"/>
 </svg>
