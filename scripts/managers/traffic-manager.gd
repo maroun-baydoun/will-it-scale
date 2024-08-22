@@ -44,4 +44,3 @@ func _generate_sessions(day: int) -> int:
 	return new_sessions
 	
 	
-

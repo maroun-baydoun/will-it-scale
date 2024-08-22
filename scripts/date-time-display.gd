@@ -65,4 +65,3 @@ func _on_fast_forward_button_pressed() -> void:
 	fast_forward_button.disabled = true
 	play_button.disabled = false
 	pause_button.disabled = false
-
