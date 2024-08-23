@@ -3,13 +3,17 @@ class_name DateTimeDisplay
 
 signal paused
 signal resumed
+signal sound_toggled
 
 @onready var day_label: Label = %DayLabel
 @onready var hour_label: Label = %HourLabel
 @onready var pause_button: Button = %PauseButton
 @onready var play_button: Button = %PlayButton
+@onready var sound_button: Button = %SoundButton
 @onready var fast_forward_button: Button = %FastForwardButton
 
+@onready var audio_on_icon: Texture2D = load("res://assets/icons/audio-on.svg")
+@onready var audio_off_icon: Texture2D = load("res://assets/icons/audio-off.svg")
 
 const DAY_FORMAT: String = "Day: %s"
 const TIME_FORMAT: String = "%s:%s"
@@ -65,3 +69,13 @@ func _on_fast_forward_button_pressed() -> void:
 	fast_forward_button.disabled = true
 	play_button.disabled = false
 	pause_button.disabled = false
+
+
+func _on_sound_button_toggled(toggled_on: bool) -> void:
+	if not toggled_on:
+		sound_button.icon = audio_off_icon
+	else:
+		sound_button.icon = audio_on_icon
+		
+	sound_toggled.emit()
+	

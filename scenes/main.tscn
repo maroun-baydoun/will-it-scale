@@ -206,6 +206,7 @@ volume_db = -5.0
 [connection signal="zoomed_out" from="CameraController" to="." method="_on_camera_controller_zoomed_out"]
 [connection signal="paused" from="GuiLayer/DateTimeDisplay" to="." method="_on_paused"]
 [connection signal="resumed" from="GuiLayer/DateTimeDisplay" to="." method="_on_resumed"]
+[connection signal="sound_toggled" from="GuiLayer/DateTimeDisplay" to="." method="_on_sound_toggled"]
 [connection signal="rotated_left" from="GuiLayer/Toolbar" to="." method="_on_toolbar_rotated_left"]
 [connection signal="rotated_right" from="GuiLayer/Toolbar" to="." method="_on_toolbar_rotated_right"]
 [connection signal="zoomed_in" from="GuiLayer/Toolbar" to="." method="_on_toolbar_zoomed_in"]

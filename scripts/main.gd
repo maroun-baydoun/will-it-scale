@@ -201,3 +201,7 @@ func _on_paused() -> void:
 func _on_resumed() -> void:
 	if theme_music_player.stream_paused:
 		theme_music_player.stream_paused = false
+
+
+func _on_sound_toggled() -> void:
+	theme_music_player.stream_paused = not theme_music_player.stream_paused

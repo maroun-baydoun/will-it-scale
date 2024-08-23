@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://burvuv1q1oe1t"]
+[gd_scene load_steps=8 format=3 uid="uid://burvuv1q1oe1t"]
 
 [ext_resource type="Script" path="res://scripts/date-time-display.gd" id="1_jtxx4"]
 [ext_resource type="FontFile" uid="uid://cwxxvels6k7tt" path="res://assets/fonts/NotoSansMono-Regular.ttf" id="2_i6f01"]
 [ext_resource type="Texture2D" uid="uid://dqbygo20rnmob" path="res://assets/icons/pause.svg" id="3_3u462"]
 [ext_resource type="Theme" uid="uid://b6h58sqqjjw4q" path="res://theme.tres" id="3_q2v6x"]
+[ext_resource type="Texture2D" uid="uid://rbtmmahhvu8h" path="res://assets/icons/audio-on.svg" id="4_80s40"]
 [ext_resource type="Texture2D" uid="uid://blc68hukoq7jt" path="res://assets/icons/play.svg" id="5_0qy1b"]
 [ext_resource type="Texture2D" uid="uid://cbtts74lycygo" path="res://assets/icons/fast-forward.svg" id="5_iall4"]
 
@@ -55,6 +56,18 @@ text = "0"
 layout_mode = 2
 alignment = 2
 
+[node name="SoundButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+theme = ExtResource("3_q2v6x")
+theme_type_variation = &"TimelineButton"
+toggle_mode = true
+button_pressed = true
+icon = ExtResource("4_80s40")
+flat = true
+icon_alignment = 2
+
 [node name="PauseButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 process_mode = 3
@@ -86,6 +99,7 @@ icon = ExtResource("5_iall4")
 flat = true
 icon_alignment = 2
 
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/SoundButton" to="." method="_on_sound_button_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/FastForwardButton" to="." method="_on_fast_forward_button_pressed"]
