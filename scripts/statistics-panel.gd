@@ -40,7 +40,7 @@ var current_power_consumption:int:
 		current_power_consumption_label.text = "%skWh" % value
 		
 func _ready():
-	tooltip.visible = false
+	tooltip.hide()
 		
 	for panel in panels:
 		panel.mouse_entered.connect(func (): _on_panel_container_mouse_entered(panel))
@@ -49,10 +49,13 @@ func _ready():
 func _on_panel_container_mouse_entered(panel: PanelContainer) -> void:
 	var statistic: String = panel.get_meta("statistic")
 	tooltip_label.text = TOOLTIP_CONTENT[statistic]
-	tooltip.position.x = panel.global_position.x + panel.size.x + 16
-	tooltip.position.y = panel.global_position.y
-	tooltip.visible = true
+	tooltip.set_position(Vector2(panel.global_position.x + panel.size.x + 16, panel.global_position.y))
+	tooltip_label.show()
+	tooltip.show()
+	
 
 
 func _on_panel_container_mouse_exited() -> void:
-	tooltip.visible = false
+	tooltip_label.hide()
+	tooltip.hide()
+	

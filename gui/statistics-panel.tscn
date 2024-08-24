@@ -62,13 +62,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_m6tit")
 [node name="Tooltip" type="PanelContainer" parent="PanelContainer"]
 unique_name_in_owner = true
 top_level = true
-custom_minimum_size = Vector2(500, 100)
+custom_minimum_size = Vector2(500, 20)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_pxwa2")
 
 [node name="TooltipLabel" type="Label" parent="PanelContainer/Tooltip"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8oxul")
 theme_override_font_sizes/font_size = 24
