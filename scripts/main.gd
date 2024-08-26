@@ -106,7 +106,7 @@ func _on_grid_cell_clicked(cell: GridCell):
 		_start_game()
 
 	var server: Server = server_scene.instantiate()
-	
+
 	if not finance_manager.can_purchase(server.price):
 		server.queue_free()
 		return
