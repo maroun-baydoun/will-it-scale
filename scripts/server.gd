@@ -2,22 +2,46 @@ extends MeshInstance3D
 
 class_name Server
 
+signal selected(server: Server)
+
 @onready var height: float = mesh.get_aabb().size.y
 @onready var price_label: Label3D = $PriceLabel
 @onready var level_label: Label3D = $LevelLabel
+@onready var original_albedo_color: Color = self.get_active_material(0).albedo_color
 
 const INITIAL_COMPUTING_POWER: int = 100
 
+static var CURRENT_ID: int = 1;
+
+var id: int = 0;
 var computing_power: int = INITIAL_COMPUTING_POWER
 var hourly_power_consumption: int = 1 #kWh
 var price: int = 1000
-var level: int = 3:
+var level: int = 1:
 	set(l):
 		level = l
 		level_label.text = str(l)
 
+var is_selected: bool = false:
+	set(s):
+		is_selected = s
+		if is_selected:
+			self.get_active_material(0).albedo_color.r = self.original_albedo_color.r - 20
+		else :
+			self.get_active_material(0).albedo_color = self.original_albedo_color
+				
+			
+
+var is_selectable: bool = true:
+	set(s):
+		is_selectable = s
 
 	
+func _ready() -> void:
+	self.id = Server.CURRENT_ID
+	Server.CURRENT_ID +=1
+		
+
 func appear(origin: Vector3):
 	transform.origin = origin
 	transform.origin.y = -height
@@ -43,5 +67,11 @@ func animate_price():
 func _on_static_body_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_mask == MOUSE_BUTTON_LEFT:
-			pass
+			if self.is_selected:
+				self.is_selected = false
+
+			elif self.is_selected == false:
+				self.is_selected = true
+				self.selected.emit(self)
+				
 	

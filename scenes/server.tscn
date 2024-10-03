@@ -5,6 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dlooh42oyj048" path="res://assets/models/server.obj" id="3_rjotf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r8m2"]
+resource_local_to_scene = true
 albedo_color = Color(0.266667, 0.137255, 0.490196, 1)
 roughness = 0.5
 emission = Color(0.466667, 0.227451, 1, 1)
@@ -16,6 +17,7 @@ clearcoat_roughness = 1.0
 data = PackedVector3Array(-0.2, 0.3, 0.2, 0.2, 0.3, 0.2, -0.2, -0.3, 0.2, 0.2, 0.3, 0.2, 0.2, -0.3, 0.2, -0.2, -0.3, 0.2, 0.2, 0.3, -0.2, -0.2, 0.3, -0.2, 0.2, -0.3, -0.2, -0.2, 0.3, -0.2, -0.2, -0.3, -0.2, 0.2, -0.3, -0.2, 0.2, 0.3, 0.2, 0.2, 0.3, -0.2, 0.2, -0.3, 0.2, 0.2, 0.3, -0.2, 0.2, -0.3, -0.2, 0.2, -0.3, 0.2, -0.2, 0.3, -0.2, -0.2, 0.3, 0.2, -0.2, -0.3, -0.2, -0.2, 0.3, 0.2, -0.2, -0.3, 0.2, -0.2, -0.3, -0.2, 0.2, 0.3, 0.2, -0.2, 0.3, 0.2, 0.2, 0.3, -0.2, -0.2, 0.3, 0.2, -0.2, 0.3, -0.2, 0.2, 0.3, -0.2, -0.2, -0.3, 0.2, 0.2, -0.3, 0.2, -0.2, -0.3, -0.2, 0.2, -0.3, 0.2, 0.2, -0.3, -0.2, -0.2, -0.3, -0.2)
 
 [node name="MeshInstance3D2" type="MeshInstance3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_7r8m2")
 mesh = ExtResource("3_rjotf")
 script = ExtResource("1_47tiv")
