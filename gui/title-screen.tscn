@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://bfjcoosfop2g7" path="res://assets/textures/splash.png" id="2_hcly1"]
 [ext_resource type="FontFile" uid="uid://cp55nkphtgax0" path="res://assets/fonts/NotoSansMono-Bold.ttf" id="2_jud00"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84125"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx56p"]
 content_margin_left = 128.0
 content_margin_top = 16.0
 content_margin_right = 128.0
 content_margin_bottom = 16.0
-bg_color = Color(0.278431, 0.14902, 0.341176, 0.886275)
+bg_color = Color(0.160784, 0.0784314, 0.2, 0.886275)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -21,12 +21,12 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx56p"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84125"]
 content_margin_left = 128.0
 content_margin_top = 16.0
 content_margin_right = 128.0
 content_margin_bottom = 16.0
-bg_color = Color(0.160784, 0.0784314, 0.2, 0.886275)
+bg_color = Color(0.278431, 0.14902, 0.341176, 0.886275)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -100,15 +100,15 @@ uppercase = true
 [node name="StartButton" type="Button" parent="CanvasLayer/TitleScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_colors/font_color = Color(1, 1, 1, 0.901961)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 0.901961)
 theme_override_fonts/font = ExtResource("2_jud00")
 theme_override_font_sizes/font_size = 92
-theme_override_styles/normal = SubResource("StyleBoxFlat_84125")
 theme_override_styles/hover = SubResource("StyleBoxFlat_qx56p")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qx56p")
+theme_override_styles/normal = SubResource("StyleBoxFlat_84125")
 text = "Start"
 
 [connection signal="pressed" from="CanvasLayer/TitleScreen/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
