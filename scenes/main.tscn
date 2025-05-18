@@ -213,6 +213,7 @@ volume_db = -5.0
 [connection signal="zoomed_out" from="GuiLayer/Toolbar" to="." method="_on_toolbar_zoomed_out"]
 [connection signal="on_grid_cell_clicked" from="Platform" to="." method="_on_grid_cell_clicked"]
 [connection signal="computing_power_updated" from="Managers/ServerManager" to="." method="_on_computing_power_updated"]
+[connection signal="server_removed" from="Managers/ServerManager" to="." method="_on_server_removed"]
 [connection signal="funds_added" from="Managers/FinanceManager" to="." method="_on_funds_added"]
 [connection signal="funds_removed" from="Managers/FinanceManager" to="." method="_on_funds_removed"]
 [connection signal="time_advanced" from="Managers/DateTimeManager" to="." method="_on_time_advanced"]

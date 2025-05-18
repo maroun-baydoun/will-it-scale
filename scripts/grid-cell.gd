@@ -1,8 +1,10 @@
 extends MeshInstance3D
 class_name GridCell
 
+const UNASSIGNED_SERVER_ID: int = -1;
 
 var is_empty: bool = true;
+var server_id: int = UNASSIGNED_SERVER_ID;
 
 signal clicked(origin);
 
@@ -10,9 +12,15 @@ signal clicked(origin);
 
 var can_receive_input : bool = false
 
-func occupy():
+func occupy(s_id: int):
+	server_id = s_id
 	is_empty = false
 	mesh.material.albedo_color.a = 0.0
+	
+func liberate():
+	is_empty = true
+	server_id = UNASSIGNED_SERVER_ID
+	mesh.material.albedo_color.a = _initial_alpha
 
 func _on_body_input_event(camera, event, position, normal, shape_idx):
 	if (event is InputEventMouseButton):

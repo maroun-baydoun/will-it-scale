@@ -28,7 +28,7 @@ extends Node3D
 @onready var theme_music_player: AudioStreamPlayer = %ThemeMusicPlayer
 
 var has_placed_first_server : bool = false
-var grid_cells: Array[GridCell] = []
+
 
 func _ready():
 	await get_tree().create_timer(0.5).timeout
@@ -111,9 +111,10 @@ func _on_grid_cell_clicked(cell: GridCell):
 		server.queue_free()
 		return
 	
-	cell.occupy()
 	platform.add_server(server)
+	cell.occupy(server.id)
 	server.appear(cell.transform.origin)
+	
 	
 	server_manager.add_server(server)
 	finance_manager.remove_funds(server.price)
@@ -205,3 +206,20 @@ func _on_resumed() -> void:
 
 func _on_sound_toggled() -> void:
 	theme_music_player.stream_paused = not theme_music_player.stream_paused
+
+
+func _on_server_removed(server: Server) -> void:
+	var server_grid_cell: GridCell
+	
+	for grid_cell in platform.grid_cells:
+		if grid_cell.server_id == server.id:
+			server_grid_cell = grid_cell
+			break
+	
+	print("Grid cell of server", server_grid_cell)
+		
+	if server_grid_cell:
+		server_grid_cell.liberate()
+			
+			
+	

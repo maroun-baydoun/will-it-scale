@@ -3,11 +3,13 @@ extends MeshInstance3D
 class_name Server
 
 signal selected(server: Server)
+signal unselected(server: Server)
 
 @onready var height: float = mesh.get_aabb().size.y
 @onready var price_label: Label3D = $PriceLabel
 @onready var level_label: Label3D = $LevelLabel
 @onready var original_albedo_color: Color = self.get_active_material(0).albedo_color
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 const INITIAL_COMPUTING_POWER: int = 100
 
@@ -26,15 +28,15 @@ var is_selected: bool = false:
 	set(s):
 		is_selected = s
 		if is_selected:
-			self.get_active_material(0).albedo_color.r = self.original_albedo_color.r - 20
+			animation_player.play("blink")
 		else :
-			self.get_active_material(0).albedo_color = self.original_albedo_color
+			animation_player.stop()
 				
 			
 
-var is_selectable: bool = true:
+var is_selectable_for_merge: bool = true:
 	set(s):
-		is_selectable = s
+		is_selectable_for_merge = s
 
 	
 func _ready() -> void:
@@ -67,10 +69,15 @@ func animate_price():
 func _on_static_body_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_mask == MOUSE_BUTTON_LEFT:
+			
 			if self.is_selected:
 				self.is_selected = false
+				self.unselected.emit(self)
 
 			elif self.is_selected == false:
+				if not self.is_selectable_for_merge:
+					return
+
 				self.is_selected = true
 				self.selected.emit(self)
 				
