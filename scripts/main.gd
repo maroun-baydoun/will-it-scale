@@ -215,8 +215,6 @@ func _on_server_removed(server: Server) -> void:
 		if grid_cell.server_id == server.id:
 			server_grid_cell = grid_cell
 			break
-	
-	print("Grid cell of server", server_grid_cell)
 		
 	if server_grid_cell:
 		server_grid_cell.liberate()

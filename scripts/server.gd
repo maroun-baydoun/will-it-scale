@@ -5,6 +5,8 @@ class_name Server
 signal selected(server: Server)
 signal unselected(server: Server)
 
+signal computing_power_updated(computing_power: int)
+
 @onready var height: float = mesh.get_aabb().size.y
 @onready var price_label: Label3D = $PriceLabel
 @onready var level_label: Label3D = $LevelLabel
@@ -16,7 +18,11 @@ const INITIAL_COMPUTING_POWER: int = 100
 static var CURRENT_ID: int = 1;
 
 var id: int = 0;
-var computing_power: int = INITIAL_COMPUTING_POWER
+var computing_power: int = INITIAL_COMPUTING_POWER:
+	set(p):
+		var old_computing_power = computing_power
+		computing_power = p
+		computing_power_updated.emit(old_computing_power, computing_power)
 var hourly_power_consumption: int = 1 #kWh
 var price: int = 1000
 var level: int = 1:

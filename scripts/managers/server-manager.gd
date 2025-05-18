@@ -5,8 +5,10 @@ signal computing_power_updated(computing_power:int)
 signal server_removed(server: Server)
 
 var servers : Array[Server] = []
-
-var total_computing_power: int = 0
+var total_computing_power: int = 0:
+	set(p):
+		total_computing_power = p
+		computing_power_updated.emit(total_computing_power)
 
 const UNSELECTED_SERVER_ID: int = -1
 
@@ -17,11 +19,15 @@ var second_selected_server_id: int = UNSELECTED_SERVER_ID
 func add_server(server: Server):
 	server.selected.connect(self._on_server_selected)
 	server.unselected.connect(self._on_server_unselected)
+	server.computing_power_updated.connect(self._on_server_computing_power_updated)
 	servers.append(server)
 
 	total_computing_power += server.computing_power
-	computing_power_updated.emit(total_computing_power)
 	
+func _on_server_computing_power_updated(old_computing_power:int, new_computing_power: int):
+	total_computing_power -= old_computing_power
+	total_computing_power += new_computing_power
+	pass
 	
 func _on_server_unselected(server: Server): 
 	if server.id == first_selected_server_id:
@@ -46,10 +52,15 @@ func _on_server_selected(server: Server):
 			
 		server_removed.emit(first_server)
 		
+		var computing_power_to_remove = first_server.computing_power
+		
 		first_server.queue_free()
 		servers.erase(first_server)
 		
+		total_computing_power -= computing_power_to_remove
+		
 		server.level += server.level
+		server.computing_power *= 2
 		
 		first_selected_server_id = UNSELECTED_SERVER_ID
 		second_selected_server_id = UNSELECTED_SERVER_ID
@@ -59,8 +70,7 @@ func _on_server_selected(server: Server):
 		_set_servers_selectable(servers, true)
 		
 		
-	
-	
+
 func _get_server_by_id(id: int):
 	var found_server: Server
 	
